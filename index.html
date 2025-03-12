@@ -123,6 +123,14 @@
             vertical-align: middle;
             margin-right: 0.5rem;
         }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem 0;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+             color: #777;
+        }
     </style>
 </head>
 <body>
@@ -273,9 +281,10 @@
         </div>
 
         <button onclick="calcularEGerarPDF()">Gerar Orçamento</button>
-            <p>Feito com amor por Aufrax e DeepSeek</p>
     </div>
-
+<footer>
+    Feito com ❤ por Vinicius Barbosa
+</footer>
     <script>
         document.getElementById('data').value = new Date().toISOString().split('T')[0];
         let configVisible = false;

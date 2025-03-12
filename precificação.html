@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonCalc PRO - Precificação Completa</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        :root {
+            --primary: #2A3950;
+            --secondary: #4CAF50;
+            --accent: #2196F3;
+            --background: #FFFFFF;
+            --border: #E0E0E0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui;
+        }
+
+        body {
+            background: #f5f5f5;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--background);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 2rem;
+        }
+
+        .config-toggle {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            float: right;
+        }
+
+        .price-config {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: none;
+            border: 1px solid var(--border);
+        }
+
+        .grid-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #424242;
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        .inline-inputs {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .total-box {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: filter 0.3s;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .material-icons {
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="config-toggle" onclick="toggleConfig()">⚙ Configurações Avançadas</button>
+        <h1>NeonCalc PRO 💡</h1>
+
+        <div class="price-config" id="configPanel">
+            <h2>Configurações de Preços</h2>
+            <div class="grid-section">
+                <div class="input-group">
+                    <label>Neon LED (metro)</label>
+                    <input type="number" id="preco-neon" value="8.00" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Chapa Acrílico</label>
+                    <input type="number" id="preco-acrilico" value="400.00">
+                </div>
+                <div class="input-group">
+                    <label>Preço por Solda</label>
+                    <input type="number" id="preco-solda" value="6.00">
+                </div>
+                <div class="input-group">
+                    <label>Fonte (unidade)</label>
+                    <input type="number" id="preco-fonte" value="30.00">
+                </div>
+                <div class="input-group">
+                    <label>Hora de Trabalho</label>
+                    <input type="number" id="preco-hora" value="50.00">
+                </div>
+                <div class="input-group">
+                    <label>Fios (metro)</label>
+                    <input type="number" id="preco-fios" value="4.50">
+                </div>
+                <div class="input-group">
+                    <label>Plástico Bolha (m²)</label>
+                    <input type="number" id="preco-bolha" value="8.00">
+                </div>
+                <div class="input-group">
+                    <label>Diversos (fixo)</label>
+                    <input type="number" id="preco-diversos" value="35.00">
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-section">
+            <div>
+                <div class="input-group">
+                    <label>Cliente</label>
+                    <input type="text" id="cliente" required>
+                </div>
+                <div class="input-group">
+                    <label>Data</label>
+                    <input type="date" id="data" required>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>Observações</label>
+                <textarea id="observacoes" placeholder="Detalhes adicionais..."></textarea>
+            </div>
+        </div>
+
+        <div class="grid-section">
+            <div>
+                <h2>Materiais</h2>
+                <div class="input-group">
+                    <label>Metragem Neon LED</label>
+                    <input type="number" id="metro-neon" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label>Dimensões Acrílico (cm)</label>
+                    <div class="inline-inputs">
+                        <div>
+                            <input type="number" id="largura-acrilico" placeholder="Largura">
+                        </div>
+                        <div>
+                            <input type="number" id="altura-acrilico" placeholder="Altura">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>Número de Soldas</label>
+                    <input type="number" id="soldas">
+                </div>
+                
+                <div class="input-group">
+                    <label>Fios (metros)</label>
+                    <input type="number" id="metros-fios">
+                </div>
+                
+                <div class="input-group">
+                    <label>Fontes (unidades)</label>
+                    <input type="number" id="unidades-fonte">
+                </div>
+            </div>
+
+            <div>
+                <h2>Instalação</h2>
+                <div class="input-group">
+                    <label>Horas de Produção</label>
+                    <input type="number" id="horas-producao" step="0.5">
+                </div>
+                
+                <div class="input-group">
+                    <label>Distância (km)</label>
+                    <input type="number" id="distancia" step="1">
+                </div>
+                
+                <div class="input-group">
+                    <label>Tipo de Instalação</label>
+                    <select id="tipo-instalacao">
+                        <option value="1">Básica</option>
+                        <option value="1.2">Complexa</option>
+                        <option value="1.5">Premium</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label>Equipe (pessoas)</label>
+                    <input type="number" id="equipe" value="1" min="1">
+                </div>
+            </div>
+
+            <div>
+                <h2>Outros Custos</h2>
+                <div class="input-group">
+                    <label>Plástico Bolha (m²)</label>
+                    <input type="number" id="metros-bolha">
+                </div>
+                
+                <div class="input-group">
+                    <label>% Lucro</label>
+                    <input type="number" id="lucro" value="35" step="5">
+                </div>
+                
+                <div class="input-group">
+                    <label>Despesas Diversas</label>
+                    <input type="number" id="diversos" value="35.00">
+                </div>
+            </div>
+        </div>
+
+        <div class="total-box">
+            <div id="resultados"></div>
+        </div>
+
+        <button onclick="calcularEGerarPDF()">Gerar Orçamento PDF Profissional</button>
+    </div>
+
+    <script>
+        document.getElementById('data').value = new Date().toISOString().split('T')[0];
+        let configVisible = false;
+
+        function toggleConfig() {
+            const panel = document.getElementById('configPanel');
+            configVisible = !configVisible;
+            panel.style.display = configVisible ? 'block' : 'none';
+        }
+
+        function calcular() {
+            const config = {
+                neon: parseFloat(document.getElementById('preco-neon').value),
+                acrilico: parseFloat(document.getElementById('preco-acrilico').value),
+                solda: parseFloat(document.getElementById('preco-solda').value),
+                fonte: parseFloat(document.getElementById('preco-fonte').value),
+                hora: parseFloat(document.getElementById('preco-hora').value),
+                fios: parseFloat(document.getElementById('preco-fios').value),
+                bolha: parseFloat(document.getElementById('preco-bolha').value),
+                diversos: parseFloat(document.getElementById('preco-diversos').value)
+            };
+
+            const inputs = {
+                neon: parseFloat(document.getElementById('metro-neon').value) || 0,
+                largura: parseFloat(document.getElementById('largura-acrilico').value) || 0,
+                altura: parseFloat(document.getElementById('altura-acrilico').value) || 0,
+                soldas: parseFloat(document.getElementById('soldas').value) || 0,
+                fios: parseFloat(document.getElementById('metros-fios').value) || 0,
+                fontes: parseFloat(document.getElementById('unidades-fonte').value) || 0,
+                bolha: parseFloat(document.getElementById('metros-bolha').value) || 0,
+                horasProducao: parseFloat(document.getElementById('horas-producao').value) || 0,
+                distancia: parseFloat(document.getElementById('distancia').value) || 0,
+                tipoInstalacao: parseFloat(document.getElementById('tipo-instalacao').value),
+                equipe: parseFloat(document.getElementById('equipe').value) || 1,
+                diversos: parseFloat(document.getElementById('diversos').value) || 0,
+                lucro: parseFloat(document.getElementById('lucro').value) || 0
+            };
+
+            // Cálculos principais
+            const custoNeon = inputs.neon * config.neon;
+            const custoSoldas = inputs.soldas * config.solda;
+            const custoFontes = inputs.fontes * config.fonte;
+            const custoFios = inputs.fios * config.fios;
+            const custoBolha = inputs.bolha * config.bolha;
+            
+            // Cálculo acrílico com 10% de desperdício
+            const areaUtilizada = (inputs.largura/100) * (inputs.altura/100);
+            const custoAcrilico = areaUtilizada > 0 
+                ? (areaUtilizada / 2 * config.acrilico) * 1.10 
+                : 0;
+
+            // Cálculos instalação
+            const custoProducao = inputs.horasProducao * config.hora;
+            const custoInstalacao = (inputs.distancia * 0.5) * inputs.tipoInstalacao * inputs.equipe;
+
+            // Totais
+            const totalMateriais = custoNeon + custoAcrilico + custoSoldas + custoFontes + custoFios + custoBolha + inputs.diversos;
+            const totalServicos = custoProducao + custoInstalacao;
+            const totalBruto = totalMateriais + totalServicos;
+            const margemLucro = totalBruto * (inputs.lucro/100);
+            const totalFinal = totalBruto + margemLucro;
+
+            // Atualizar preview
+            document.getElementById('resultados').innerHTML = `
+                <h3>Prévia do Orçamento</h3>
+                <p>Materiais: R$ ${totalMateriais.toFixed(2)}</p>
+                <p>Serviços: R$ ${totalServicos.toFixed(2)}</p>
+                <p>Lucro (${inputs.lucro}%): R$ ${margemLucro.toFixed(2)}</p>
+                <h2>TOTAL: R$ ${totalFinal.toFixed(2)}</h2>
+            `;
+
+            return {
+                ...inputs,
+                config,
+                custoNeon,
+                custoAcrilico,
+                custoSoldas,
+                custoFontes,
+                custoFios,
+                custoBolha,
+                custoProducao,
+                custoInstalacao,
+                totalMateriais,
+                totalServicos,
+                margemLucro,
+                totalFinal
+            };
+        }
+
+        function calcularEGerarPDF() {
+            const data = calcular();
+            const doc = new jspdf.jsPDF();
+            
+            // Cabeçalho profissional
+            doc.setFontSize(16);
+            doc.setTextColor(42, 57, 80);
+            doc.text(`ORÇAMENTO - ${document.getElementById('cliente').value}`, 15, 25);
+            
+            doc.setFontSize(10);
+            doc.text(`Data: ${document.getElementById('data').value} | Responsável: ${document.getElementById('cliente').value}`, 15, 35);
+
+            // Tabela detalhada
+            const tableData = [
+                ['Descrição', 'Detalhes', 'Valor'],
+                ['Neon LED', `${data.neon}m @ R$${data.config.neon}/m`, `R$ ${data.custoNeon.toFixed(2)}`],
+                ['Acrílico', `${data.largura}x${data.altura}cm + 10%`, `R$ ${data.custoAcrilico.toFixed(2)}`],
+                ['Soldas', `${data.soldas}un @ R$${data.config.solda}`, `R$ ${data.custoSoldas.toFixed(2)}`],
+                ['Fontes', `${data.fontes}un @ R$${data.config.fonte}`, `R$ ${data.custoFontes.toFixed(2)}`],
+                ['Fios', `${data.fios}m @ R$${data.config.fios}`, `R$ ${data.custoFios.toFixed(2)}`],
+                ['Embalagem', `${data.bolha}m² @ R$${data.config.bolha}`, `R$ ${data.custoBolha.toFixed(2)}`],
+                ['Produção', `${data.horasProducao}h @ R$${data.config.hora}/h`, `R$ ${data.custoProducao.toFixed(2)}`],
+                ['Instalação', `${data.distancia}km (${document.getElementById('tipo-instalacao').options[document.getElementById('tipo-instalacao').selectedIndex].text})`, `R$ ${data.custoInstalacao.toFixed(2)}`],
+                ['Diversos', '', `R$ ${data.diversos.toFixed(2)}`],
+                ['Subtotal', '', `R$ ${(data.totalMateriais + data.totalServicos).toFixed(2)}`],
+                [`Lucro (${data.lucro}%)`, '', `R$ ${data.margemLucro.toFixed(2)}`],
+                ['TOTAL GERAL', '', `R$ ${data.totalFinal.toFixed(2)}`]
+            ];
+
+            doc.autoTable({
+                startY: 45,
+                head: [tableData[0]],
+                body: tableData.slice(1),
+                theme: 'grid',
+                styles: {fontSize: 9},
+                headStyles: {fillColor: [42, 57, 80]},
+                columnStyles: {
+                    0: {cellWidth: 60},
+                    1: {cellWidth: 80},
+                    2: {cellWidth: 40}
+                }
+            });
+
+            // Observações
+            const observacoes = document.getElementById('observacoes').value;
+            if(observacoes) {
+                doc.setFontSize(10);
+                doc.text(`Observações: ${observacoes}`, 15, doc.lastAutoTable.finalY + 15);
+            }
+
+            doc.save(`Orcamento_${document.getElementById('cliente').value}_${new Date().toISOString().slice(0,10)}.pdf`);
+        }
+    </script>
+</body>
+</html>

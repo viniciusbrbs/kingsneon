@@ -273,6 +273,7 @@
         </div>
 
         <button onclick="calcularEGerarPDF()">Gerar Orçamento</button>
+            <p>Feito com amor por Aufrax e DeepSeek</p>
     </div>
 
     <script>
@@ -417,6 +418,5 @@
             doc.save(`Orcamento_${document.getElementById('cliente').value}_${new Date().toISOString().slice(0,10)}.pdf`);
         }
     </script>
-    <p>Feito com amor por Aufrax e DeepSeek</p>
 </body>
 </html>

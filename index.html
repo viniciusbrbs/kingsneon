@@ -169,6 +169,14 @@
                     <label>Diversos (fixo)</label>
                     <input type="number" id="preco-diversos" value="35.00">
                 </div>
+                <div class="input-group">
+                    <label>Valor do Corte a Laser</label>
+                    <input type="number" id="preco-corte-laser" value="10.00">
+                </div>
+                <div class="input-group">
+                    <label>% sobre Materiais</label>
+                    <input type="number" id="porcentagem-materiais" value="40" step="1">
+                </div>
             </div>
         </div>
 
@@ -200,14 +208,22 @@
                 
                 <div class="input-group">
                     <label>Dimensões Acrílico (cm)</label>
-                    <div class="inline-inputs">
-                        <div>
-                            <input type="number" id="largura-acrilico" placeholder="Largura">
-                        </div>
-                        <div>
-                            <input type="number" id="altura-acrilico" placeholder="Altura">
+                    <div id="acrilico-container">
+                        <div class="inline-inputs">
+                            <div>
+                                <input type="number" class="largura-acrilico" placeholder="Largura">
+                            </div>
+                            <div>
+                                <input type="number" class="altura-acrilico" placeholder="Altura">
+                            </div>
                         </div>
                     </div>
+                    <button type="button" onclick="adicionarAcrilico()">Adicionar outra peça</button>
+                </div>
+                
+                <div class="input-group">
+                    <label>Quantidade de Cortes</label>
+                    <input type="number" id="quantidade-cortes" value="1" min="1">
                 </div>
                 
                 <div class="input-group">
@@ -237,22 +253,8 @@
                     <input type="number" id="metros-bolha">
                 </div>
                 <div class="input-group">
-                    <label>Distância (km)</label>
-                    <input type="number" id="distancia" step="1">
-                </div>
-                
-                <div class="input-group">
-                    <label>Tipo de Instalação</label>
-                    <select id="tipo-instalacao">
-                        <option value="1">Básica</option>
-                        <option value="1.2">Complexa</option>
-                        <option value="1.5">Premium</option>
-                    </select>
-                </div>
-                
-                <div class="input-group">
-                    <label>Equipe (pessoas)</label>
-                    <input type="number" id="equipe" value="1" min="1">
+                    <label>Valor da Instalação</label>
+                    <input type="number" id="valor-instalacao" step="0.01">
                 </div>
             </div>
 
@@ -289,7 +291,8 @@
             const savedConfig = JSON.parse(localStorage.getItem(CONFIG_KEY)) || {};
             const configFields = [
                 'preco-neon', 'preco-acrilico', 'preco-solda', 'preco-fonte',
-                'preco-hora', 'preco-fios', 'preco-bolha', 'preco-diversos'
+                'preco-hora', 'preco-fios', 'preco-bolha', 'preco-diversos',
+                'preco-corte-laser', 'porcentagem-materiais'
             ];
 
             configFields.forEach(id => {
@@ -326,6 +329,21 @@
             panel.style.display = configVisible ? 'block' : 'none';
         }
 
+        function adicionarAcrilico() {
+            const container = document.getElementById('acrilico-container');
+            const novoAcrilico = document.createElement('div');
+            novoAcrilico.className = 'inline-inputs';
+            novoAcrilico.innerHTML = `
+                <div>
+                    <input type="number" class="largura-acrilico" placeholder="Largura">
+                </div>
+                <div>
+                    <input type="number" class="altura-acrilico" placeholder="Altura">
+                </div>
+            `;
+            container.appendChild(novoAcrilico);
+        }
+
         function calcular() {
             const config = {
                 neon: parseFloat(document.getElementById('preco-neon').value),
@@ -335,47 +353,54 @@
                 hora: parseFloat(document.getElementById('preco-hora').value),
                 fios: parseFloat(document.getElementById('preco-fios').value),
                 bolha: parseFloat(document.getElementById('preco-bolha').value),
-                diversos: parseFloat(document.getElementById('preco-diversos').value)
+                diversos: parseFloat(document.getElementById('preco-diversos').value),
+                corteLaser: parseFloat(document.getElementById('preco-corte-laser').value),
+                porcentagemMateriais: parseFloat(document.getElementById('porcentagem-materiais').value)
             };
 
             const inputs = {
                 neon: parseFloat(document.getElementById('metro-neon').value) || 0,
-                largura: parseFloat(document.getElementById('largura-acrilico').value) || 0,
-                altura: parseFloat(document.getElementById('altura-acrilico').value) || 0,
                 soldas: parseFloat(document.getElementById('soldas').value) || 0,
                 fios: parseFloat(document.getElementById('metros-fios').value) || 0,
                 fontes: parseFloat(document.getElementById('unidades-fonte').value) || 0,
                 bolha: parseFloat(document.getElementById('metros-bolha').value) || 0,
                 horasProducao: parseFloat(document.getElementById('horas-producao').value) || 0,
-                distancia: parseFloat(document.getElementById('distancia').value) || 0,
-                tipoInstalacao: parseFloat(document.getElementById('tipo-instalacao').value),
-                equipe: parseFloat(document.getElementById('equipe').value) || 1,
+                instalacao: parseFloat(document.getElementById('valor-instalacao').value) || 0,
                 diversos: parseFloat(document.getElementById('diversos').value) || 0,
-                lucro: parseFloat(document.getElementById('lucro').value) || 0
+                lucro: parseFloat(document.getElementById('lucro').value) || 0,
+                cortes: parseFloat(document.getElementById('quantidade-cortes').value) || 1
             };
 
-            // Cálculos principais
-            const custoNeon = inputs.neon * config.neon;
-            const custoSoldas = inputs.soldas * config.solda;
-            const custoFontes = inputs.fontes * config.fonte;
-            const custoFios = inputs.fios * config.fios;
-            const custoBolha = inputs.bolha * config.bolha;
-            
-            // Cálculo acrílico com 10% de desperdício
-            const areaUtilizada = (inputs.largura/100) * (inputs.altura/100);
-            const custoAcrilico = areaUtilizada > 0 
-                ? (areaUtilizada / 2 * config.acrilico) * 1.10 
-                : 0;
+            // Calcular o custo do acrílico para todas as peças
+            const acrilicoLarguras = document.querySelectorAll('.largura-acrilico');
+            const acrilicoAlturas = document.querySelectorAll('.altura-acrilico');
+            let custoAcrilicoTotal = 0;
+
+            acrilicoLarguras.forEach((largura, index) => {
+                const altura = acrilicoAlturas[index];
+                const areaUtilizada = (parseFloat(largura.value) / 100) * (parseFloat(altura.value) / 100);
+                if (areaUtilizada > 0) {
+                    custoAcrilicoTotal += (areaUtilizada / 2 * config.acrilico) * 1.10 * inputs.cortes;
+                }
+            });
+
+            // Aplicar porcentagem sobre os materiais
+            const custoNeon = (inputs.neon * config.neon) * (1 + config.porcentagemMateriais / 100);
+            const custoSoldas = (inputs.soldas * config.solda) * (1 + config.porcentagemMateriais / 100);
+            const custoFontes = (inputs.fontes * config.fonte) * (1 + config.porcentagemMateriais / 100);
+            const custoFios = (inputs.fios * config.fios) * (1 + config.porcentagemMateriais / 100);
+            const custoBolha = (inputs.bolha * config.bolha) * (1 + config.porcentagemMateriais / 100);
+            const custoAcrilico = custoAcrilicoTotal * (1 + config.porcentagemMateriais / 100);
 
             // Cálculos instalação
             const custoProducao = inputs.horasProducao * config.hora;
-            const custoInstalacao = (inputs.distancia * 0.5) * inputs.tipoInstalacao * inputs.equipe;
+            const custoInstalacao = inputs.instalacao;
 
             // Totais
             const totalMateriais = custoNeon + custoAcrilico + custoSoldas + custoFontes + custoFios + custoBolha + inputs.diversos;
             const totalServicos = custoProducao + custoInstalacao;
             const totalBruto = totalMateriais + totalServicos;
-            const margemLucro = totalBruto * (inputs.lucro/100);
+            const margemLucro = totalBruto * (inputs.lucro / 100);
             const totalFinal = totalBruto + margemLucro;
 
             // Atualizar preview
@@ -421,13 +446,13 @@
             const tableData = [
                 ['Descrição', 'Detalhes', 'Valor'],
                 ['Neon LED', `${data.neon}m @ R$${data.config.neon}/m`, `R$ ${data.custoNeon.toFixed(2)}`],
-                ['Acrílico', `${data.largura}x${data.altura}cm + 10%`, `R$ ${data.custoAcrilico.toFixed(2)}`],
+                ['Acrílico', `Várias peças`, `R$ ${data.custoAcrilico.toFixed(2)}`],
                 ['Soldas', `${data.soldas}un @ R$${data.config.solda}`, `R$ ${data.custoSoldas.toFixed(2)}`],
                 ['Fontes', `${data.fontes}un @ R$${data.config.fonte}`, `R$ ${data.custoFontes.toFixed(2)}`],
                 ['Fios', `${data.fios}m @ R$${data.config.fios}`, `R$ ${data.custoFios.toFixed(2)}`],
                 ['Embalagem', `${data.bolha}m² @ R$${data.config.bolha}`, `R$ ${data.custoBolha.toFixed(2)}`],
                 ['Produção', `${data.horasProducao}h @ R$${data.config.hora}/h`, `R$ ${data.custoProducao.toFixed(2)}`],
-                ['Instalação', `${data.distancia}km (${document.getElementById('tipo-instalacao').options[document.getElementById('tipo-instalacao').selectedIndex].text})`, `R$ ${data.custoInstalacao.toFixed(2)}`],
+                ['Instalação', `Valor fixo`, `R$ ${data.custoInstalacao.toFixed(2)}`],
                 ['Diversos', '', `R$ ${data.diversos.toFixed(2)}`],
                 ['Subtotal', '', `R$ ${(data.totalMateriais + data.totalServicos).toFixed(2)}`],
                 [`Lucro (${data.lucro}%)`, '', `R$ ${data.margemLucro.toFixed(2)}`],

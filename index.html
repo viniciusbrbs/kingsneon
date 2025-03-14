@@ -119,17 +119,13 @@
             display: none;
         }
 
-        .material-icons {
-            vertical-align: middle;
-            margin-right: 0.5rem;
-        }
         footer {
             text-align: center;
             margin-top: 2rem;
             padding: 1rem 0;
             border-top: 1px solid var(--border);
             font-size: 0.9rem;
-             color: #777;
+            color: #777;
         }
     </style>
 </head>
@@ -282,12 +278,50 @@
 
         <button onclick="calcularEGerarPDF()">Gerar Orçamento</button>
     </div>
-<footer>
-    Feito com ❤ por Vinicius Barbosa
-</footer>
+    <footer>
+        Feito com ❤ por Vinicius Barbosa
+    </footer>
+
     <script>
-        document.getElementById('data').value = new Date().toISOString().split('T')[0];
+        // Configuração inicial e LocalStorage
+        const CONFIG_KEY = 'neoncalcConfig';
         let configVisible = false;
+
+        // Carregar configurações salvas
+        function loadConfig() {
+            const savedConfig = JSON.parse(localStorage.getItem(CONFIG_KEY)) || {};
+            const configFields = [
+                'preco-neon', 'preco-acrilico', 'preco-solda', 'preco-fonte',
+                'preco-hora', 'preco-fios', 'preco-bolha', 'preco-diversos'
+            ];
+
+            configFields.forEach(id => {
+                const field = document.getElementById(id);
+                if (savedConfig[id]) {
+                    field.value = savedConfig[id];
+                }
+            });
+        }
+
+        // Salvar configurações
+        function saveConfig() {
+            const config = {};
+            document.querySelectorAll('.price-config input').forEach(input => {
+                config[input.id] = input.value;
+            });
+            localStorage.setItem(CONFIG_KEY, JSON.stringify(config));
+        }
+
+        // Event listeners para salvar automaticamente
+        document.querySelectorAll('.price-config input').forEach(input => {
+            input.addEventListener('input', saveConfig);
+        });
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('data').value = new Date().toISOString().split('T')[0];
+            loadConfig();
+        });
 
         function toggleConfig() {
             const panel = document.getElementById('configPanel');

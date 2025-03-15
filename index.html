@@ -205,6 +205,11 @@
                     <label>Metragem Neon LED</label>
                     <input type="number" id="metro-neon" step="0.1">
                 </div>
+
+                 <div class="input-group">
+                    <label>Número de Soldas</label>
+                    <input type="number" id="soldas">
+                </div>
                 
                 <div class="input-group">
                     <label>Dimensões Acrílico (cm)</label>
@@ -218,7 +223,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" onclick="adicionarAcrilico()">Adicionar outra peça</button>
+                    <button type="button" style="margin-top: 5px;" onclick="adicionarAcrilico()">Adicionar outra peça</button>
                 </div>
                 
                 <div class="input-group">
@@ -227,10 +232,13 @@
                 </div>
                 
                 <div class="input-group">
-                    <label>Número de Soldas</label>
-                    <input type="number" id="soldas">
+                    <label>Horas de Produção</label>
+                    <input type="number" id="horas-producao" step="0.5">
                 </div>
-                
+            </div>
+
+            <div>
+                <h2>Outros Custos</h2>
                 <div class="input-group">
                     <label>Fios (metros)</label>
                     <input type="number" id="metros-fios">
@@ -240,18 +248,12 @@
                     <label>Fontes (unidades)</label>
                     <input type="number" id="unidades-fonte">
                 </div>
-            </div>
-
-            <div>
-                <h2>Outros Custos</h2>
-                <div class="input-group">
-                    <label>Horas de Produção</label>
-                    <input type="number" id="horas-producao" step="0.5">
-                </div>
+                
                 <div class="input-group">
                     <label>Plástico Bolha (m²)</label>
                     <input type="number" id="metros-bolha">
                 </div>
+                
                 <div class="input-group">
                     <label>Valor da Instalação</label>
                     <input type="number" id="valor-instalacao" step="0.01">

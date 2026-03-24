@@ -1,0 +1,58 @@
+---
+import socialData from '../../data/social.json';
+import type { SocialData, SocialLink } from '../../types';
+
+const social = socialData as SocialData;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-border-subtle)] bg-[var(--color-bg)]" role="contentinfo">
+  <div class="container-wide py-space-10 md:py-space-12">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-8">
+      <div>
+        <a href="/" aria-label="Kings Neon — Página inicial">
+          <img
+            src="/brand/logo-white.svg"
+            alt="Kings Neon"
+            width="160"
+            height="44"
+            class="h-10 w-auto mb-space-4"
+          />
+        </a>
+        <p class="text-fluid-sm text-[var(--color-text-muted)] max-w-[460px]">
+          Neon LED sob medida para marcas e ambientes com atendimento direto pelo WhatsApp.
+        </p>
+      </div>
+
+      <div class="flex flex-col items-start md:items-end gap-space-4">
+        <a
+          href="https://wa.me/5547992158989?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20para%20um%20letreiro."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center rounded-lg bg-[var(--color-accent)] px-6 py-3 text-fluid-sm font-medium text-[#050505] hover:bg-[var(--color-accent-hover)] transition-colors"
+        >
+          Chamar no WhatsApp
+        </a>
+
+        <div class="flex flex-wrap gap-space-4">
+          {social.links.map((link: SocialLink) => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-fluid-sm text-[var(--color-text-faint)] hover:text-[var(--color-text)] transition-colors"
+              aria-label={`${link.platform}: ${link.handle}`}
+            >
+              {link.platform}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-[var(--color-border-subtle)] mt-space-8 pt-space-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-space-3">
+      <p class="text-fluid-xs text-[var(--color-text-faint)]">© {currentYear} Kings Neon. Todos os direitos reservados.</p>
+      <p class="text-fluid-xs text-[var(--color-text-faint)]">Itapema • Santa Catarina</p>
+    </div>
+  </div>
+</footer>

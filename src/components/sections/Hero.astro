@@ -1,0 +1,110 @@
+---
+import Button from '../ui/Button.astro';
+---
+
+<section class="hero relative overflow-hidden" aria-label="Apresentação Kings Neon">
+  <div class="absolute inset-0 -z-10" aria-hidden="true">
+    <div class="hero-orb hero-orb--blue"></div>
+    <div class="hero-orb hero-orb--lime"></div>
+    <div class="hero-grid"></div>
+  </div>
+
+  <div class="container-wide py-space-12 md:py-space-16 lg:py-space-20">
+    <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 items-center">
+      <div class="max-w-[760px]" data-reveal>
+        <span class="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[rgba(249,254,255,0.03)] px-4 py-2 text-fluid-xs text-[var(--color-text-muted)] mb-space-6">
+          <span class="w-2 h-2 rounded-full bg-[var(--color-accent)] shadow-[0_0_12px_rgba(192,225,0,0.9)]"></span>
+          Neon LED sob medida para marcas e ambientes em Santa Catarina
+        </span>
+
+        <h1 class="font-display text-fluid-hero font-extrabold text-[var(--color-text)] leading-[0.98] mb-space-6">
+          Neon LED com presença forte,
+          <span class="block text-neon">visual premium e orçamento rápido</span>
+        </h1>
+
+        <p class="text-fluid-lg text-[var(--color-text-muted)] max-w-[620px] mb-space-4">
+          Criamos letreiros sob medida para <strong>fachadas, recepções, interiores comerciais e projetos personalizados</strong>, com acabamento limpo e atendimento direto no WhatsApp.
+        </p>
+
+        <p class="text-fluid-sm text-[var(--color-text-faint)] max-w-[620px] mb-space-10">
+          Pouco texto, processo simples e foco no que importa: entender sua ideia e transformar em um letreiro que chama atenção de verdade.
+        </p>
+
+        <div class="flex flex-wrap gap-space-4 mb-space-10">
+          <Button label="Pedir orçamento no WhatsApp" href="https://wa.me/5547992158989?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20para%20um%20letreiro." variant="primary" size="lg" icon="whatsapp" />
+          <a href="https://www.instagram.com/kingsneon" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-lg border border-[var(--color-border)] px-8 py-4 text-fluid-base text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-accent)] transition-colors">
+            Ver Instagram
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-4 text-fluid-sm">
+          <div class="rounded-2xl border border-[var(--color-border-subtle)] bg-[rgba(249,254,255,0.03)] p-space-4">
+            <p class="text-[var(--color-accent)] font-semibold mb-1">Projeto sob medida</p>
+            <p class="text-[var(--color-text-faint)]">Cada peça é pensada para o seu espaço.</p>
+          </div>
+          <div class="rounded-2xl border border-[var(--color-border-subtle)] bg-[rgba(249,254,255,0.03)] p-space-4">
+            <p class="text-[var(--color-accent)] font-semibold mb-1">Acabamento premium</p>
+            <p class="text-[var(--color-text-faint)]">Visual limpo, elegante e bem resolvido.</p>
+          </div>
+          <div class="rounded-2xl border border-[var(--color-border-subtle)] bg-[rgba(249,254,255,0.03)] p-space-4">
+            <p class="text-[var(--color-accent)] font-semibold mb-1">Atendimento rápido</p>
+            <p class="text-[var(--color-text-faint)]">Tudo centralizado no WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative" data-reveal="left">
+        <div class="glass-panel rounded-[28px] p-4 md:p-5 shadow-[var(--shadow-neon-lg)]">
+          <div class="rounded-[24px] border border-[var(--color-border-subtle)] bg-[linear-gradient(180deg,rgba(1,81,194,0.18),rgba(1,2,0,0.88))] p-6 md:p-8 overflow-hidden relative">
+            <div class="absolute -top-10 -right-10 w-36 h-36 rounded-full bg-[rgba(192,225,0,0.16)] blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-40 h-40 rounded-full bg-[rgba(1,81,194,0.18)] blur-3xl"></div>
+
+            <div class="relative z-10 space-y-5">
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-fluid-xs uppercase tracking-[0.22em] text-[var(--color-text-faint)]">Kings Neon</span>
+                <span class="rounded-full border border-[var(--color-border)] px-3 py-1 text-fluid-xs text-[var(--color-accent)]">Itapema • SC</span>
+              </div>
+
+              <div class="rounded-2xl border border-[rgba(192,225,0,0.18)] bg-[rgba(1,2,0,0.32)] p-5">
+                <p class="text-fluid-xs uppercase tracking-[0.18em] text-[var(--color-text-faint)] mb-3">O que fazemos</p>
+                <h2 class="font-display text-fluid-xl font-bold text-[var(--color-text)] mb-3">Fachadas, interiores e peças personalizadas.</h2>
+                <p class="text-fluid-sm text-[var(--color-text-muted)]">Um site direto ao ponto, com menos ruído e mais foco em apresentação, confiança e contato rápido.</p>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div class="surface-card rounded-2xl p-4">
+                  <p class="text-fluid-xs text-[var(--color-text-faint)] mb-2">Atendimento</p>
+                  <p class="font-display text-fluid-base font-semibold text-[var(--color-text)]">WhatsApp direto</p>
+                </div>
+                <div class="surface-card rounded-2xl p-4">
+                  <p class="text-fluid-xs text-[var(--color-text-faint)] mb-2">Portfólio</p>
+                  <p class="font-display text-fluid-base font-semibold text-[var(--color-text)]">Instagram</p>
+                </div>
+                <div class="surface-card rounded-2xl p-4 col-span-2">
+                  <p class="text-fluid-xs text-[var(--color-text-faint)] mb-2">Cobertura</p>
+                  <p class="text-fluid-sm text-[var(--color-text-muted)]">Itapema, Balneário Camboriú, Itajaí, Florianópolis e projetos enviados para outras regiões.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.hero { min-height: calc(100vh - 6rem); display: flex; align-items: center; }
+.hero-orb {
+  position: absolute; border-radius: 999px; filter: blur(120px); opacity: 0.8;
+  animation: glowPulse 8s ease-in-out infinite;
+}
+.hero-orb--blue { width: 34rem; height: 34rem; right: -8rem; top: -6rem; background: var(--glow-blue); }
+.hero-orb--lime { width: 24rem; height: 24rem; left: -6rem; bottom: 2rem; background: var(--glow-lime-soft); animation-delay: 2s; }
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(249,254,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(249,254,255,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.55), transparent 85%);
+}
+</style>

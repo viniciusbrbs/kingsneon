@@ -1,0 +1,104 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/portfolio",
+      "destination": "https://www.instagram.com/kingsneon",
+      "permanent": false
+    },
+    {
+      "source": "/portfolio/:path*",
+      "destination": "https://www.instagram.com/kingsneon",
+      "permanent": false
+    },
+    {
+      "source": "/orcamento",
+      "destination": "https://wa.me/5547992158989?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20para%20um%20letreiro.",
+      "permanent": false
+    },
+    {
+      "source": "/contato",
+      "destination": "https://wa.me/5547992158989?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20para%20um%20letreiro.",
+      "permanent": false
+    },
+    {
+      "source": "/sobre",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/letreiros-comerciais",
+      "destination": "/#solucoes",
+      "permanent": false
+    },
+    {
+      "source": "/neon-decorativo",
+      "destination": "/#solucoes",
+      "permanent": false
+    },
+    {
+      "source": "/pecas-personalizadas",
+      "destination": "/#solucoes",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/brand/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/favicon.svg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://connect.facebook.net; frame-src https://www.google.com;"
+        }
+      ]
+    }
+  ]
+}

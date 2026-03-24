@@ -1,0 +1,63 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+import servicesData from '../../data/services.json';
+import type { ServicesData, ServiceItem } from '../../types';
+
+const services = servicesData as ServicesData;
+const whatsappHref = 'https://wa.me/5547992158989?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20para%20um%20letreiro.';
+---
+
+<section id="solucoes" class="section-padding" aria-label="Soluções Kings Neon">
+  <div class="container-wide">
+    <div data-reveal>
+      <SectionHeader
+        title={services.sectionTitle}
+        subtitle={services.sectionSubtitle}
+        alignment="center"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-space-6 md:gap-space-8" data-stagger>
+      {services.items.map((service: ServiceItem) => (
+        <Card variant="interactive" padding="lg">
+          <div class="flex flex-col h-full">
+            <div class="w-12 h-12 rounded-lg bg-[var(--color-accent-muted)] flex items-center justify-center mb-space-6">
+              <Icon name={service.icon} size={24} className="text-[var(--color-accent)]" />
+            </div>
+
+            <h3 class="font-display text-fluid-lg font-semibold text-[var(--color-text)] mb-space-3">
+              {service.title}
+            </h3>
+
+            <p class="text-fluid-sm text-[var(--color-text-muted)] mb-space-6 flex-1">
+              {service.description}
+            </p>
+
+            {service.features && (
+              <ul class="space-y-space-2 mb-space-6" role="list">
+                {service.features.map((feature: string) => (
+                  <li class="flex items-center gap-space-2 text-fluid-xs text-[var(--color-text-muted)]">
+                    <Icon name="check-circle" size={16} className="text-[var(--color-accent)] flex-shrink-0" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-fluid-sm text-[var(--color-accent)] hover:text-[var(--color-text)] transition-colors"
+            >
+              <Icon name="whatsapp" size={18} className="flex-shrink-0" />
+              <span>Solicitar pelo WhatsApp</span>
+            </a>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>

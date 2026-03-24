@@ -1,0 +1,23 @@
+{
+  "items": [
+    {
+      "label": "Início",
+      "href": "/"
+    },
+    {
+      "label": "Soluções",
+      "href": "#solucoes"
+    },
+    {
+      "label": "Diferenciais",
+      "href": "#diferenciais"
+    },
+    {
+      "label": "WhatsApp",
+      "href": "https://wa.me/5547992158989?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20para%20um%20letreiro.",
+      "isExternal": true
+    }
+  ],
+  "ctaLabel": "Falar no WhatsApp",
+  "ctaHref": "https://wa.me/5547992158989?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20para%20um%20letreiro."
+}

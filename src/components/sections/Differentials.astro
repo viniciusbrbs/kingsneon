@@ -1,0 +1,38 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import Icon from '../ui/Icon.astro';
+import differentialsData from '../../data/differentials.json';
+import type { DifferentialsData, DifferentialItem } from '../../types';
+
+const differentials = differentialsData as DifferentialsData;
+---
+
+<section id="diferenciais" class="section-padding" aria-label="Diferenciais Kings Neon">
+  <div class="container-wide">
+    <div data-reveal>
+      <SectionHeader
+        title={differentials.sectionTitle}
+        subtitle={differentials.sectionSubtitle}
+        alignment="center"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-6 md:gap-space-8" data-stagger>
+      {differentials.items.map((item: DifferentialItem) => (
+        <div class="p-space-6 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border-subtle)]">
+          <div class="w-10 h-10 rounded-lg bg-[var(--color-accent-muted)] flex items-center justify-center mb-space-4">
+            <Icon name={item.icon} size={20} className="text-[var(--color-accent)]" />
+          </div>
+
+          <h3 class="font-display text-fluid-base font-semibold text-[var(--color-text)] mb-space-2">
+            {item.title}
+          </h3>
+
+          <p class="text-fluid-sm text-[var(--color-text-muted)]">
+            {item.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import Icon from '../ui/Icon.astro';
+import testimonialsData from '../../data/testimonials.json';
+import type { TestimonialsData, TestimonialItem } from '../../types';
+
+const testimonials = testimonialsData as TestimonialsData;
+---
+
+<section class="section-padding" aria-label="Depoimentos de clientes">
+  <div class="container-wide">
+    <div data-reveal>
+      <SectionHeader
+        title={testimonials.sectionTitle}
+        subtitle={testimonials.sectionSubtitle}
+        alignment="center"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-6" data-stagger>
+      {testimonials.items.map((item: TestimonialItem) => (
+        <article class="relative p-space-6 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border-subtle)]">
+          <!-- Decorative quote mark -->
+          <span
+            class="absolute top-4 right-6 font-display text-[4rem] leading-none text-[var(--color-accent-subtle)] select-none pointer-events-none"
+            aria-hidden="true"
+          >
+            &ldquo;
+          </span>
+
+          <!-- Rating stars -->
+          <div class="flex gap-1 mb-space-4" aria-label={`Avaliação: ${item.rating} de 5 estrelas`}>
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Icon
+                name="star"
+                size={16}
+                className={i < item.rating ? 'text-[var(--color-accent)] fill-[var(--color-accent)]' : 'text-[var(--color-text-faint)]'}
+              />
+            ))}
+          </div>
+
+          <!-- Quote content -->
+          <blockquote class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed mb-space-6 relative">
+            {item.content}
+          </blockquote>
+
+          <!-- Author -->
+          <footer class="flex items-center gap-space-3 border-t border-[var(--color-border-subtle)] pt-space-4">
+            <div class="w-10 h-10 rounded-full bg-[var(--color-accent-muted)] flex items-center justify-center flex-shrink-0">
+              <span class="font-display text-fluid-sm font-semibold text-[var(--color-accent)]">
+                {item.name.charAt(0)}
+              </span>
+            </div>
+            <div>
+              <p class="text-fluid-sm font-medium text-[var(--color-text)]">{item.name}</p>
+              <p class="text-fluid-xs text-[var(--color-text-faint)]">{item.role}</p>
+            </div>
+          </footer>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  article :global(.fill-\[var\(--color-accent\)\]) {
+    fill: var(--color-accent);
+    stroke: var(--color-accent);
+  }
+</style>

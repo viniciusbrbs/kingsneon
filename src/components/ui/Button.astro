@@ -1,0 +1,86 @@
+---
+import Icon from './Icon.astro';
+
+type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
+type ButtonSize = 'sm' | 'md' | 'lg';
+type IconName = 'whatsapp' | 'arrow-right';
+
+interface Props {
+  label: string;
+  href?: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  icon?: IconName | undefined;
+  fullWidth?: boolean;
+  type?: 'submit' | 'button';
+  class?: string;
+}
+
+const {
+  label,
+  href,
+  variant = 'primary',
+  size = 'md',
+  icon,
+  fullWidth = false,
+  type = 'button',
+  class: extraClass = '',
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+
+const baseClasses = [
+  'inline-flex items-center justify-center gap-2',
+  'font-body font-medium',
+  'rounded-lg',
+  'transition-all',
+  'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]',
+  'disabled:opacity-50 disabled:pointer-events-none',
+  'select-none',
+].join(' ');
+
+const sizeClasses: Record<ButtonSize, string> = {
+  sm: 'px-4 py-2 text-fluid-xs',
+  md: 'px-6 py-3 text-fluid-sm',
+  lg: 'px-8 py-4 text-fluid-base',
+};
+
+const variantClasses: Record<ButtonVariant, string> = {
+  primary: 'btn-primary bg-[var(--color-accent)] text-[#050505] hover:bg-[var(--color-accent-hover)] hover:text-[#050505] active:scale-[0.98]',
+  secondary: 'bg-[var(--color-surface-2)] text-[var(--color-text)] border border-[var(--color-border)] hover:bg-[var(--color-surface-3)] active:scale-[0.98]',
+  outline: 'bg-transparent text-[var(--color-accent)] border border-[var(--color-accent)] hover:bg-[var(--color-accent-muted)] active:scale-[0.98]',
+  ghost: 'bg-transparent text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-2)] active:scale-[0.98]',
+};
+
+const widthClass = fullWidth ? 'w-full' : '';
+
+const classes = [baseClasses, sizeClasses[size], variantClasses[variant], widthClass, extraClass].filter(Boolean).join(' ');
+
+const iconSize = size === 'sm' ? 16 : size === 'lg' ? 22 : 18;
+
+const linkProps = href ? { href } : {};
+const buttonProps = href ? {} : { type };
+---
+
+<Tag
+  class={classes}
+  {...linkProps}
+  {...buttonProps}
+>
+  {icon && <Icon name={icon} size={iconSize} />}
+  <span>{label}</span>
+</Tag>
+
+<style>
+  .btn-primary {
+    transition: var(--transition-interactive);
+  }
+
+  .btn-primary:hover {
+    box-shadow: var(--shadow-neon-md);
+  }
+
+  .btn-primary:active {
+    box-shadow: var(--shadow-neon-sm);
+  }
+</style>

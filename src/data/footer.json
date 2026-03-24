@@ -1,0 +1,66 @@
+{
+  "columns": [
+    {
+      "title": "Soluções",
+      "links": [
+        {
+          "label": "Letreiros para fachadas",
+          "href": "/neon-decorativo"
+        },
+        {
+          "label": "Letreiros internos",
+          "href": "/letreiros-comerciais"
+        },
+        {
+          "label": "Eventos e ativações",
+          "href": "/pecas-personalizadas"
+        },
+        {
+          "label": "Solicitar orçamento",
+          "href": "/orcamento"
+        }
+      ]
+    },
+    {
+      "title": "Empresa",
+      "links": [
+        {
+          "label": "Sobre nós",
+          "href": "/sobre"
+        },
+        {
+          "label": "Portfólio",
+          "href": "/portfolio"
+        },
+        {
+          "label": "Contato",
+          "href": "/contato"
+        }
+      ]
+    },
+    {
+      "title": "Atendimento",
+      "links": [
+        {
+          "label": "WhatsApp: (47) 99215-8989",
+          "href": "https://wa.me/5547992158989"
+        },
+        {
+          "label": "contato@kingsneon.com.br",
+          "href": "mailto:contato@kingsneon.com.br"
+        },
+        {
+          "label": "Itapema, Santa Catarina",
+          "href": "#"
+        }
+      ]
+    }
+  ],
+  "legalLinks": [
+    {
+      "label": "Política de Privacidade",
+      "href": "/privacidade"
+    }
+  ],
+  "copyright": "© {year} Kings Neon. Todos os direitos reservados."
+}

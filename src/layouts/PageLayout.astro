@@ -1,0 +1,43 @@
+---
+/**
+ * KINGS NEON — Page Layout
+ * Standard page wrapper with page header section.
+ */
+import BaseLayout from './BaseLayout.astro';
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  page: string;
+  title: string;
+  subtitle?: string;
+  schemaType?: 'home' | 'page' | 'service';
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const { page, title, subtitle, schemaType = 'page', breadcrumbs = [] } = Astro.props;
+---
+
+<BaseLayout page={page} schemaType={schemaType} breadcrumbs={breadcrumbs}>
+  <section class="relative pt-32 pb-16 md:pt-40 md:pb-20">
+    <div class="container-wide">
+      <div class="max-w-3xl">
+        <h1 class="font-display text-fluid-2xl font-bold text-[var(--color-text)] mb-4">
+          {title}
+        </h1>
+        {subtitle && (
+          <p class="text-fluid-base text-[var(--color-text-muted)] leading-relaxed max-w-2xl">
+            {subtitle}
+          </p>
+        )}
+      </div>
+    </div>
+    <!-- Decorative line -->
+    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color-border)] to-transparent"></div>
+  </section>
+
+  <slot />
+</BaseLayout>

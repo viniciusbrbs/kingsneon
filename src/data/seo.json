@@ -1,0 +1,107 @@
+{
+  "defaultTitle": "Kings Neon — Letreiros em Neon LED Premium em Santa Catarina",
+  "titleTemplate": "%s | Kings Neon",
+  "pages": {
+    "home": {
+      "title": "Letreiros em Neon LED em Santa Catarina | Kings Neon",
+      "description": "Kings Neon cria letreiros em neon LED premium em Itapema e atende toda Santa Catarina. Projetos sob medida para fachadas, empresas, eventos e ambientes comerciais.",
+      "canonical": "https://kingsneon.com.br",
+      "ogImage": "/images/og-home.jpg",
+      "twitterCard": "summary_large_image",
+      "keywords": [
+        "letreiro em neon led santa catarina",
+        "letreiro neon led itapema",
+        "letreiro neon led balneário camboriú",
+        "letreiro para loja santa catarina",
+        "letreiro luminoso itajaí",
+        "neon led comercial florianópolis"
+      ]
+    },
+    "portfolio": {
+      "title": "Portfólio — Projetos de Neon LED",
+      "description": "Veja projetos de letreiros em neon LED desenvolvidos pela Kings Neon para marcas, fachadas e ambientes em Santa Catarina.",
+      "canonical": "https://kingsneon.com.br/portfolio",
+      "ogImage": "/images/og-portfolio.jpg",
+      "twitterCard": "summary_large_image",
+      "keywords": [
+        "portfólio neon LED",
+        "projetos neon personalizado",
+        "letreiro neon fotos"
+      ]
+    },
+    "sobre": {
+      "title": "Sobre a Kings Neon — Nossa História",
+      "description": "Conheça a Kings Neon, empresa de Itapema especializada em letreiros em neon LED premium para Santa Catarina e todo o Brasil.",
+      "canonical": "https://kingsneon.com.br/sobre",
+      "ogImage": "/images/og-about.jpg",
+      "twitterCard": "summary_large_image"
+    },
+    "contato": {
+      "title": "Contato — Solicite seu Orçamento",
+      "description": "Solicite seu orçamento de letreiro em neon LED com a Kings Neon. Atendimento rápido em Itapema, Balneário Camboriú, Itajaí, Florianópolis e toda Santa Catarina.",
+      "canonical": "https://kingsneon.com.br/contato",
+      "ogImage": "/images/og-contact.jpg",
+      "twitterCard": "summary_large_image"
+    },
+    "privacidade": {
+      "title": "Política de Privacidade",
+      "description": "Política de privacidade da Kings Neon. Saiba como coletamos, usamos e protegemos seus dados pessoais em conformidade com a LGPD.",
+      "canonical": "https://kingsneon.com.br/privacidade",
+      "ogImage": "/images/og-home.jpg",
+      "twitterCard": "summary"
+    },
+    "neon-decorativo": {
+      "title": "Neon Decorativo — Iluminação LED para Ambientes",
+      "description": "Neon LED decorativo para sua casa, quarto, sala ou escritório. Peças personalizadas com design exclusivo e acabamento premium pela Kings Neon.",
+      "canonical": "https://kingsneon.com.br/neon-decorativo",
+      "ogImage": "/images/og-decorativo.jpg",
+      "twitterCard": "summary_large_image",
+      "keywords": [
+        "neon decorativo",
+        "neon LED decorativo",
+        "neon para quarto",
+        "luminária neon personalizada"
+      ]
+    },
+    "letreiros-comerciais": {
+      "title": "Letreiros Comerciais — Neon LED para Lojas e Empresas",
+      "description": "Letreiros em neon LED para lojas, recepções, fachadas e empresas em Santa Catarina, com design personalizado e acabamento premium.",
+      "canonical": "https://kingsneon.com.br/letreiros-comerciais",
+      "ogImage": "/images/og-comercial.jpg",
+      "twitterCard": "summary_large_image",
+      "keywords": [
+        "letreiro neon led para loja sc",
+        "fachada neon led santa catarina",
+        "letreiro comercial itapema",
+        "letreiro comercial balneário camboriú"
+      ]
+    },
+    "pecas-personalizadas": {
+      "title": "Peças Personalizadas — Neon LED Exclusivo",
+      "description": "Peças de neon LED 100% personalizadas para eventos, casamentos, festas e projetos especiais. Design sob medida pela Kings Neon.",
+      "canonical": "https://kingsneon.com.br/pecas-personalizadas",
+      "ogImage": "/images/og-personalizado.jpg",
+      "twitterCard": "summary_large_image",
+      "keywords": [
+        "neon personalizado",
+        "neon para casamento",
+        "neon para evento",
+        "peça neon sob medida"
+      ]
+    },
+    "orcamento": {
+      "title": "Solicite seu Orçamento — Kings Neon",
+      "description": "Peça um orçamento de letreiro em neon LED com a Kings Neon. Atendimento especializado em Santa Catarina e envios para todo o Brasil.",
+      "canonical": "https://kingsneon.com.br/orcamento",
+      "ogImage": "/images/og-home.jpg",
+      "twitterCard": "summary_large_image"
+    },
+    "404": {
+      "title": "Página não encontrada",
+      "description": "A página que você procura não foi encontrada. Volte para a página inicial da Kings Neon.",
+      "canonical": "https://kingsneon.com.br/404",
+      "ogImage": "/images/og-home.jpg",
+      "twitterCard": "summary"
+    }
+  }
+}

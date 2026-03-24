@@ -1,0 +1,130 @@
+---
+/**
+ * KINGS NEON — JSON-LD Structured Data Component
+ * Generates LocalBusiness, Organization, WebSite, and BreadcrumbList schemas.
+ */
+import brandData from '../../data/brand.json';
+import contactData from '../../data/contact.json';
+import socialData from '../../data/social.json';
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  type?: 'home' | 'page' | 'service';
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const { type = 'page', breadcrumbs = [] } = Astro.props;
+
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://kingsneon.com.br/#business',
+  name: brandData.name,
+  description: brandData.description,
+  url: 'https://kingsneon.com.br',
+  telephone: contactData.phone,
+  email: contactData.email,
+  foundingDate: `${brandData.foundingYear}`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: contactData.city,
+    addressRegion: contactData.region,
+    postalCode: contactData.postalCode,
+    addressCountry: contactData.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -27.0922,
+    longitude: -48.6158,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '18:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Saturday'],
+      opens: '09:00',
+      closes: '12:00',
+    },
+  ],
+  sameAs: socialData.links.map((l) => l.url),
+  image: 'https://kingsneon.com.br/images/og-home.jpg',
+  priceRange: '$$',
+  areaServed: [
+    { '@type': 'State', name: 'Santa Catarina' },
+    { '@type': 'City', name: 'Itapema' },
+    { '@type': 'City', name: 'Balneário Camboriú' },
+    { '@type': 'City', name: 'Itajaí' },
+    { '@type': 'City', name: 'Florianópolis' }
+  ],
+  makesOffer: {
+    '@type': 'Offer',
+    itemOffered: {
+      '@type': 'Service',
+      name: 'Letreiros em Neon LED Personalizados'
+    }
+  },
+};
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': 'https://kingsneon.com.br/#organization',
+  name: brandData.name,
+  url: 'https://kingsneon.com.br',
+  logo: 'https://kingsneon.com.br/brand/logo.svg',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: contactData.phone,
+    contactType: 'customer service',
+    availableLanguage: 'Portuguese',
+  },
+  sameAs: socialData.links.map((l) => l.url),
+};
+
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': 'https://kingsneon.com.br/#website',
+  name: brandData.name,
+  url: 'https://kingsneon.com.br',
+  description: brandData.description,
+  publisher: {
+    '@id': 'https://kingsneon.com.br/#organization',
+  },
+  inLanguage: 'pt-BR',
+};
+
+const breadcrumbList = breadcrumbs.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    item: item.url,
+  })),
+} : null;
+
+const schemas: Record<string, unknown>[] = [localBusiness, organization];
+
+if (type === 'home') {
+  schemas.push(website);
+}
+
+if (breadcrumbList) {
+  schemas.push(breadcrumbList);
+}
+---
+
+{schemas.map((schema) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

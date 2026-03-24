@@ -1,0 +1,64 @@
+---
+/**
+ * KINGS NEON — Base Layout
+ * Root layout with <head>, analytics, scroll reveal initialization.
+ */
+import Head from '../components/seo/Head.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import Header from '../components/sections/Header.astro';
+import Footer from '../components/sections/Footer.astro';
+import '../styles/base.css';
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  page: string;
+  schemaType?: 'home' | 'page' | 'service';
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const { page, schemaType = 'page', breadcrumbs = [] } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <Head page={page} />
+    <SchemaOrg type={schemaType} breadcrumbs={breadcrumbs} />
+  </head>
+  <body class="bg-dark-950 text-[var(--color-text)] antialiased">
+    <!-- Skip to Content -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-[var(--color-accent)] focus:text-dark-950 focus:px-4 focus:py-2 focus:rounded-md focus:font-semibold"
+    >
+      Pular para o conteúdo
+    </a>
+
+    <Header />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Scroll Reveal + Analytics Initialization -->
+    <script>
+      import { initScrollReveal } from '../lib/utils';
+      import { initScrollDepthTracking, trackEvent } from '../lib/analytics';
+
+      document.addEventListener('DOMContentLoaded', () => {
+        initScrollReveal();
+        initScrollDepthTracking();
+        trackEvent('page_view', {
+          page: window.location.pathname,
+          title: document.title,
+        });
+      });
+    </script>
+  </body>
+</html>

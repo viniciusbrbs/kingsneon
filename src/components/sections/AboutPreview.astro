@@ -1,0 +1,56 @@
+---
+import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
+import aboutData from '../../data/about.json';
+import type { AboutData } from '../../types';
+
+const about = aboutData as AboutData;
+---
+
+<section class="section-padding bg-[var(--color-surface)]" aria-label="Sobre a Kings Neon">
+  <div class="container-wide">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-space-12 items-center">
+      <!-- Text content (3 cols) -->
+      <div class="lg:col-span-3" data-reveal>
+        <Badge label="Sobre Nós" variant="accent" />
+
+        <h2 class="font-display text-fluid-2xl font-bold text-[var(--color-text)] mt-space-4 mb-space-6 leading-tight">
+          {about.sectionTitle}
+        </h2>
+
+        <p class="text-fluid-base text-[var(--color-text-muted)] leading-relaxed mb-space-8">
+          {about.shortNarrative}
+        </p>
+
+        <Button
+          label="Conheça Nossa História"
+          href="/sobre"
+          variant="outline"
+          size="md"
+          icon="arrow-right"
+        />
+      </div>
+
+      <!-- Values aside (2 cols) -->
+      <div class="lg:col-span-2 space-y-space-4" data-reveal="right">
+        {about.values.slice(0, 4).map((value) => (
+          <div class="flex gap-space-4 p-space-4 rounded-lg bg-[var(--color-surface-2)] border border-[var(--color-border-subtle)]">
+            <div class="w-8 h-8 rounded-md bg-[var(--color-accent-muted)] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-[var(--color-accent)] text-fluid-sm font-bold">
+                {value.title.charAt(0)}
+              </span>
+            </div>
+            <div>
+              <h3 class="text-fluid-sm font-semibold text-[var(--color-text)] mb-space-1">
+                {value.title}
+              </h3>
+              <p class="text-fluid-xs text-[var(--color-text-muted)]">
+                {value.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

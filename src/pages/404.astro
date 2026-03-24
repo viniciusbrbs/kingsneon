@@ -1,0 +1,78 @@
+---
+/**
+ * KINGS NEON — 404 Page
+ * Custom error page with neon-styled design.
+ */
+import MinimalLayout from '../layouts/MinimalLayout.astro';
+import Icon from '../components/ui/Icon.astro';
+---
+
+<MinimalLayout page="404">
+  <div class="text-center px-6 max-w-lg">
+    <!-- Neon 404 -->
+    <h1 class="neon-404 font-display text-[8rem] sm:text-[10rem] font-bold leading-none mb-space-6 select-none">
+      404
+    </h1>
+
+    <h2 class="font-display text-fluid-xl font-semibold text-[var(--color-text)] mb-space-4">
+      Página não encontrada
+    </h2>
+    <p class="text-fluid-base text-[var(--color-text-muted)] mb-space-8 leading-relaxed">
+      A página que você procura não existe ou foi movida. Volte para a página inicial ou entre em contato conosco.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a
+        href="/"
+        class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-fluid-sm font-medium bg-[var(--color-accent)] text-[var(--color-bg)] hover:bg-[var(--color-accent-hover)] transition-all active:scale-[0.98]"
+      >
+        <Icon name="arrow-left" size={18} />
+        <span>Voltar ao Início</span>
+      </a>
+      <a
+        href="https://wa.me/5547992158989"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-fluid-sm font-medium bg-transparent text-[var(--color-accent)] border border-[var(--color-accent)] hover:bg-[var(--color-accent-muted)] transition-all active:scale-[0.98]"
+      >
+        <Icon name="whatsapp" size={18} />
+        <span>Falar no WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</MinimalLayout>
+
+<style>
+  .neon-404 {
+    color: var(--color-accent);
+    text-shadow:
+      0 0 10px var(--glow-cyan),
+      0 0 30px var(--glow-cyan),
+      0 0 60px var(--glow-cyan),
+      0 0 100px var(--glow-cyan);
+    animation: neonPulse 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes neonPulse {
+    0% {
+      text-shadow:
+        0 0 10px var(--glow-cyan),
+        0 0 30px var(--glow-cyan),
+        0 0 60px var(--glow-cyan),
+        0 0 100px var(--glow-cyan);
+    }
+    100% {
+      text-shadow:
+        0 0 5px var(--glow-cyan),
+        0 0 15px var(--glow-cyan),
+        0 0 30px var(--glow-cyan),
+        0 0 50px var(--glow-cyan);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .neon-404 {
+      animation: none;
+    }
+  }
+</style>

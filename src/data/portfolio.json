@@ -1,0 +1,106 @@
+{
+  "sectionTitle": "Nosso Portfólio",
+  "sectionSubtitle": "Cada projeto é uma peça única. Confira alguns dos trabalhos que já iluminaram marcas e ambientes.",
+  "categories": ["Todos", "Decorativo", "Comercial", "Eventos", "Personalizado"],
+  "items": [
+    {
+      "id": "p001",
+      "title": "Love Neon",
+      "description": "Neon decorativo em rosa quente para ambiente residencial. Peça de 80cm com acabamento em acrílico transparente.",
+      "category": "Decorativo",
+      "image": "/images/portfolio/love-neon.jpg",
+      "alt": "Letreiro neon LED rosa com a palavra Love em parede de quarto",
+      "featured": true,
+      "location": "Balneário Camboriú, SC",
+      "projectType": "Residencial"
+    },
+    {
+      "id": "p002",
+      "title": "Café & Bistrô Letreiro",
+      "description": "Letreiro de fachada para cafeteria gourmet. Neon branco quente com logotipo personalizado.",
+      "category": "Comercial",
+      "image": "/images/portfolio/cafe-bistro.jpg",
+      "alt": "Letreiro neon LED branco quente na fachada de cafeteria moderna",
+      "featured": true,
+      "location": "Itapema, SC",
+      "projectType": "Comercial"
+    },
+    {
+      "id": "p003",
+      "title": "Open Bar Neon",
+      "description": "Peça decorativa neon azul para bar temático. Letras cursivas com efeito de brilho intenso.",
+      "category": "Comercial",
+      "image": "/images/portfolio/open-bar.jpg",
+      "alt": "Neon LED azul escrito Open Bar em ambiente de bar",
+      "featured": true,
+      "location": "Florianópolis, SC",
+      "projectType": "Comercial"
+    },
+    {
+      "id": "p004",
+      "title": "Neon Casamento",
+      "description": "Peça exclusiva para cerimônia de casamento. Neon branco com nomes dos noivos em tipografia elegante.",
+      "category": "Eventos",
+      "image": "/images/portfolio/casamento.jpg",
+      "alt": "Neon LED branco com nomes dos noivos em cenário de casamento",
+      "featured": true,
+      "location": "Joinville, SC",
+      "projectType": "Evento"
+    },
+    {
+      "id": "p005",
+      "title": "Good Vibes Neon",
+      "description": "Neon multicolorido com frase motivacional para sala de estar. Efeito degradê do rosa ao laranja.",
+      "category": "Decorativo",
+      "image": "/images/portfolio/good-vibes.jpg",
+      "alt": "Neon LED colorido com a frase Good Vibes em sala de estar",
+      "featured": true,
+      "location": "Itajaí, SC",
+      "projectType": "Residencial"
+    },
+    {
+      "id": "p006",
+      "title": "Logo Neon Restaurante",
+      "description": "Letreiro comercial com logotipo completo para restaurante japonês. Neon vermelho e branco em base preta.",
+      "category": "Comercial",
+      "image": "/images/portfolio/restaurante.jpg",
+      "alt": "Letreiro neon LED com logo de restaurante japonês na fachada",
+      "featured": true,
+      "location": "Navegantes, SC",
+      "projectType": "Comercial"
+    },
+    {
+      "id": "p007",
+      "title": "Neon Infantil",
+      "description": "Neon LED em formato de unicórnio para quarto infantil. Cores suaves em rosa e lilás.",
+      "category": "Decorativo",
+      "image": "/images/portfolio/infantil.jpg",
+      "alt": "Neon LED em forma de unicórnio em quarto infantil",
+      "featured": false,
+      "location": "Blumenau, SC",
+      "projectType": "Residencial"
+    },
+    {
+      "id": "p008",
+      "title": "Festa Corporativa",
+      "description": "Instalação especial para evento corporativo com logo da empresa em neon LED azul e branco.",
+      "category": "Eventos",
+      "image": "/images/portfolio/corporativo.jpg",
+      "alt": "Logo corporativo em neon LED em evento empresarial",
+      "featured": false,
+      "location": "Florianópolis, SC",
+      "projectType": "Evento"
+    },
+    {
+      "id": "p009",
+      "title": "Quarto Gamer",
+      "description": "Transforme seu espaço com personalidade! Letreiro em Neon LED rosa personalizado para quarto gamer",
+      "category": "Decorativo",
+      "image": "/images/portfolio/gameon.webp",
+      "alt": "Neon LED verde limão com frase motivacional em academia",
+      "featured": false,
+      "location": "Itapema, SC",
+      "projectType": "Decorativo"
+    }
+  ]
+}

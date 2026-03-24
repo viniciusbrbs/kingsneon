@@ -1,0 +1,64 @@
+---
+import Button from '../ui/Button.astro';
+import ctaData from '../../data/cta.json';
+import type { CtaData, CtaBlockData } from '../../types';
+
+const cta = (ctaData as CtaData).blocks['footer'] as CtaBlockData;
+---
+
+<section class="cta-final section-padding relative overflow-hidden" aria-label="Chamada para ação">
+  <!-- Background glow -->
+  <div class="absolute inset-0 -z-10" aria-hidden="true">
+    <div class="cta-glow cta-glow--left"></div>
+    <div class="cta-glow cta-glow--right"></div>
+  </div>
+
+  <div class="container-default text-center" data-reveal>
+    <h2 class="font-display text-fluid-2xl md:text-fluid-3xl font-bold text-[var(--color-text)] leading-tight mb-space-4">
+      {cta.headline}
+    </h2>
+
+    <p class="text-fluid-base text-[var(--color-text-muted)] max-w-narrow mx-auto mb-space-10">
+      {cta.subheadline}
+    </p>
+
+    <Button
+      label={cta.ctaLabel}
+      href={cta.ctaHref}
+      variant="primary"
+      size="lg"
+      icon="whatsapp"
+    />
+  </div>
+</section>
+
+<style>
+  .cta-final {
+    background: var(--color-surface);
+  }
+
+  .cta-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+  }
+
+  .cta-glow--left {
+    width: 400px;
+    height: 400px;
+    bottom: -20%;
+    left: -5%;
+    background: var(--glow-cyan-soft);
+    opacity: 0.4;
+  }
+
+  .cta-glow--right {
+    width: 300px;
+    height: 300px;
+    top: -15%;
+    right: -3%;
+    background: var(--glow-cyan-soft);
+    opacity: 0.3;
+  }
+</style>

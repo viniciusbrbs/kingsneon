@@ -1,0 +1,45 @@
+{
+  "sectionTitle": "Letreiros em neon LED para vender mais e marcar presença",
+  "sectionSubtitle": "Soluções pensadas para marcas, fachadas e ambientes que precisam chamar atenção em Santa Catarina.",
+  "items": [
+    {
+      "id": "neon-decorativo",
+      "title": "Letreiros para fachadas",
+      "description": "Projetos em neon LED para fachadas comerciais, vitrines e pontos de venda com leitura forte, presença noturna e acabamento premium.",
+      "icon": "store",
+      "slug": "neon-decorativo",
+      "features": [
+        "Impacto visual imediato",
+        "Projeto sob medida",
+        "Alta durabilidade",
+        "Aplicação comercial"
+      ]
+    },
+    {
+      "id": "letreiros-comerciais",
+      "title": "Letreiros internos de marca",
+      "description": "Recepções, halls, balcões e paredes instagramáveis com letreiros em neon LED alinhados ao posicionamento visual da empresa.",
+      "icon": "sparkles",
+      "slug": "letreiros-comerciais",
+      "features": [
+        "Reforço de branding",
+        "Visual premium",
+        "Baixo consumo",
+        "Instalação simplificada"
+      ]
+    },
+    {
+      "id": "pecas-personalizadas",
+      "title": "Letreiros para eventos e ativações",
+      "description": "Projetos sob medida para inaugurações, casamentos, feiras, stands e ações promocionais que pedem presença e memorabilidade.",
+      "icon": "palette",
+      "slug": "pecas-personalizadas",
+      "features": [
+        "Projeto exclusivo",
+        "Consultoria criativa",
+        "Entrega para SC e Brasil",
+        "Suporte no pós-venda"
+      ]
+    }
+  ]
+}

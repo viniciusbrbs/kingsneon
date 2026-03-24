@@ -1,0 +1,36 @@
+{
+  "sectionTitle": "Por que marcas de Santa Catarina escolhem a Kings Neon?",
+  "sectionSubtitle": "Criatividade com foco comercial, acabamento premium e leitura forte em qualquer ambiente.",
+  "items": [
+    {
+      "title": "Design que vende",
+      "description": "O visual do letreiro é pensado para gerar presença, destacar sua marca e valorizar o espaço.",
+      "icon": "palette"
+    },
+    {
+      "title": "Garantia de até 2 anos",
+      "description": "Cobertura em projetos selecionados com transparência e confiança no que entregamos.",
+      "icon": "shield"
+    },
+    {
+      "title": "Instalação organizada",
+      "description": "Processo limpo, alinhado e com atenção à estética final do ambiente.",
+      "icon": "wrench"
+    },
+    {
+      "title": "Atendimento rápido",
+      "description": "Resposta ágil, orçamento claro e suporte próximo durante toda a jornada.",
+      "icon": "heart"
+    },
+    {
+      "title": "LED de alta eficiência",
+      "description": "Brilho consistente, baixo consumo e excelente durabilidade para uso contínuo.",
+      "icon": "zap"
+    },
+    {
+      "title": "Acabamento premium",
+      "description": "Fixação bem resolvida, estrutura confiável e resultado visual de alto padrão.",
+      "icon": "star"
+    }
+  ]
+}

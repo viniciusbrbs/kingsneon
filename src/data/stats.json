@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "value": 500,
+      "label": "Letreiros entregues",
+      "suffix": "+"
+    },
+    {
+      "value": 5,
+      "label": "Anos iluminando marcas",
+      "suffix": "+"
+    },
+    {
+      "value": 100,
+      "label": "Projetos personalizados",
+      "suffix": "%"
+    },
+    {
+      "value": 2,
+      "label": "Garantia em projetos selecionados",
+      "prefix": "até "
+    }
+  ]
+}

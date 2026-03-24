@@ -1,0 +1,20 @@
+{
+  "headline": "Transformamos luz em arte.",
+  "subheadline": "Letreiros e neon LED personalizados com design exclusivo, tecnologia premium e acabamento impecável.",
+  "valueProposition": "Desde 2020 criando peças únicas que iluminam marcas, ambientes e momentos especiais em Santa Catarina e todo o Brasil.",
+  "ctas": [
+    {
+      "label": "Solicitar Orçamento",
+      "href": "#orcamento",
+      "variant": "primary",
+      "icon": "whatsapp"
+    },
+    {
+      "label": "Ver Portfólio",
+      "href": "/portfolio",
+      "variant": "outline",
+      "icon": "arrow-right"
+    }
+  ],
+  "backgroundType": "gradient"
+}

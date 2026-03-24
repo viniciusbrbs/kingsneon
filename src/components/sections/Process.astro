@@ -1,0 +1,58 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import Icon from '../ui/Icon.astro';
+import processData from '../../data/process.json';
+import type { ProcessData, ProcessStep } from '../../types';
+
+const process = processData as ProcessData;
+---
+
+<section class="section-padding bg-[var(--color-surface)]" aria-label="Nosso processo de trabalho">
+  <div class="container-default">
+    <div data-reveal>
+      <SectionHeader
+        title={process.sectionTitle}
+        subtitle={process.sectionSubtitle}
+        alignment="center"
+      />
+    </div>
+
+    <div class="relative">
+      <!-- Vertical connecting line -->
+      <div
+        class="hidden md:block absolute left-8 top-0 bottom-0 w-px bg-[var(--color-border)]"
+        aria-hidden="true"
+      ></div>
+
+      <div class="space-y-space-8 md:space-y-space-12">
+        {process.steps.map((step: ProcessStep) => (
+          <div class="process-step flex gap-space-6 md:gap-space-8" data-reveal>
+            <div class="relative flex-shrink-0">
+              <div class="w-16 h-16 rounded-full bg-[var(--color-accent-muted)] border-2 border-[var(--color-accent)] flex items-center justify-center">
+                {step.icon ? (
+                  <Icon name={step.icon} size={24} className="text-[var(--color-accent)]" />
+                ) : (
+                  <span class="font-display text-fluid-base font-bold text-[var(--color-accent)]">
+                    {step.step}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div class="pt-space-3">
+              <span class="text-fluid-xs text-[var(--color-accent)] font-medium uppercase tracking-wider">
+                {`Etapa ${step.step}`}
+              </span>
+              <h3 class="font-display text-fluid-lg font-semibold text-[var(--color-text)] mt-space-1 mb-space-2">
+                {step.title}
+              </h3>
+              <p class="text-fluid-sm text-[var(--color-text-muted)] max-w-[520px]">
+                {step.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

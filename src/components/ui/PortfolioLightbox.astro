@@ -1,0 +1,227 @@
+---
+import type { PortfolioItem } from '../../types';
+
+interface Props {
+  items: PortfolioItem[];
+  lightboxId: string;
+}
+
+const { items, lightboxId } = Astro.props;
+const itemsJson = JSON.stringify(items);
+---
+
+<div
+  id={`portfolio-lightbox-${lightboxId}`}
+  class="portfolio-lightbox fixed inset-0 z-[999] hidden items-end justify-center bg-black/72 p-0 sm:items-center sm:p-5"
+  data-lightbox-root
+  data-lightbox-id={lightboxId}
+  aria-hidden="true"
+>
+  <div class="absolute inset-0" data-lightbox-close></div>
+
+  <div class="pointer-events-none relative z-10 flex w-full justify-center px-0 sm:px-16">
+    <button
+      type="button"
+      class="pointer-events-auto absolute left-3 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/45 text-2xl text-white transition hover:bg-black/65 sm:flex"
+      aria-label="Imagem anterior"
+      data-lightbox-prev
+    >
+      ‹
+    </button>
+
+    <div class="portfolio-lightbox-panel pointer-events-auto flex w-fit max-w-[min(92vw,980px)] flex-col overflow-hidden rounded-t-2xl border border-white/10 bg-[var(--color-surface)] shadow-2xl sm:max-h-[88vh] sm:rounded-2xl">
+      <button
+        type="button"
+        class="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/45 text-xl text-white transition hover:bg-black/65"
+        aria-label="Fechar imagem"
+        data-lightbox-close
+      >
+        ×
+      </button>
+
+      <div class="relative flex justify-center px-3 pt-3 sm:px-4 sm:pt-4">
+        <img
+          class="portfolio-lightbox-image block h-auto max-h-[58vh] w-auto max-w-full rounded-xl object-contain sm:max-h-[68vh]"
+          alt=""
+          data-lightbox-image
+        />
+      </div>
+
+      <div class="border-t border-white/10 px-5 py-4 sm:px-6 sm:py-5">
+        <div class="flex items-start justify-between gap-4">
+          <div class="min-w-0 flex-1">
+            <p class="mb-1 text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--color-accent)]" data-lightbox-category></p>
+            <h3 class="font-display text-lg font-semibold text-[var(--color-text)] sm:text-xl" data-lightbox-title></h3>
+          </div>
+          <span class="shrink-0 text-xs text-[var(--color-text-faint)]" data-lightbox-counter></span>
+        </div>
+
+        <p class="mt-3 max-w-full break-words text-sm leading-relaxed text-[var(--color-text-muted)] sm:text-[15px]" data-lightbox-description></p>
+        <p class="mt-3 break-words text-xs uppercase tracking-[0.18em] text-[var(--color-text-faint)]" data-lightbox-location></p>
+
+        <div class="mt-4 flex items-center justify-between gap-3 sm:hidden">
+          <button
+            type="button"
+            class="flex min-h-11 flex-1 items-center justify-center rounded-full border border-white/10 bg-[var(--color-surface-2)] px-4 py-2 text-sm font-medium text-[var(--color-text)] transition hover:border-[var(--color-accent)]/35"
+            data-lightbox-prev
+          >
+            Anterior
+          </button>
+          <button
+            type="button"
+            class="flex min-h-11 flex-1 items-center justify-center rounded-full border border-white/10 bg-[var(--color-surface-2)] px-4 py-2 text-sm font-medium text-[var(--color-text)] transition hover:border-[var(--color-accent)]/35"
+            data-lightbox-next
+          >
+            Próxima
+          </button>
+        </div>
+
+        <p class="mt-3 text-center text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-faint)] sm:hidden">
+          Deslize para navegar
+        </p>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="pointer-events-auto absolute right-3 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/45 text-2xl text-white transition hover:bg-black/65 sm:flex"
+      aria-label="Próxima imagem"
+      data-lightbox-next
+    >
+      ›
+    </button>
+  </div>
+</div>
+
+<script define:vars={{ itemsJson, lightboxId }}>
+  const items = JSON.parse(itemsJson);
+  const root = document.querySelector(`[data-lightbox-id="${lightboxId}"]`);
+  const triggers = Array.from(document.querySelectorAll(`[data-portfolio-lightbox-trigger="${lightboxId}"]`));
+
+  if (root && triggers.length && items.length) {
+    const image = root.querySelector('[data-lightbox-image]');
+    const category = root.querySelector('[data-lightbox-category]');
+    const title = root.querySelector('[data-lightbox-title]');
+    const description = root.querySelector('[data-lightbox-description]');
+    const location = root.querySelector('[data-lightbox-location]');
+    const counter = root.querySelector('[data-lightbox-counter]');
+    const closeButtons = root.querySelectorAll('[data-lightbox-close]');
+    const prevButtons = root.querySelectorAll('[data-lightbox-prev]');
+    const nextButtons = root.querySelectorAll('[data-lightbox-next]');
+
+    let activeIndex = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let lastFocusedTrigger = null;
+
+    const getVisibleTriggers = () => triggers.filter((trigger) => {
+      if (!(trigger instanceof HTMLElement)) return false;
+      return !trigger.classList.contains('is-hidden') && trigger.offsetParent !== null;
+    });
+
+    const getCurrentItems = () => {
+      const visibleTriggers = getVisibleTriggers();
+      if (visibleTriggers.length) {
+        return visibleTriggers.map((trigger) => {
+          const index = Number(trigger.getAttribute('data-lightbox-index') || 0);
+          return { trigger, item: items[index], originalIndex: index };
+        }).filter((entry) => entry.item);
+      }
+
+      return triggers.map((trigger) => {
+        const index = Number(trigger.getAttribute('data-lightbox-index') || 0);
+        return { trigger, item: items[index], originalIndex: index };
+      }).filter((entry) => entry.item);
+    };
+
+    const render = () => {
+      const currentItems = getCurrentItems();
+      const current = currentItems[activeIndex];
+      if (!current || !image || !category || !title || !description || !location || !counter) return;
+
+      image.src = current.item.image;
+      image.alt = current.item.alt || current.item.title;
+      category.textContent = current.item.category || '';
+      title.textContent = current.item.title || '';
+      description.textContent = current.item.description || '';
+      location.textContent = current.item.location || '';
+      location.style.display = current.item.location ? 'block' : 'none';
+      counter.textContent = `${activeIndex + 1} / ${currentItems.length}`;
+    };
+
+    const open = (trigger) => {
+      const currentItems = getCurrentItems();
+      const triggerIndex = currentItems.findIndex((entry) => entry.trigger === trigger);
+      activeIndex = triggerIndex >= 0 ? triggerIndex : 0;
+      lastFocusedTrigger = trigger || document.activeElement;
+      render();
+      root.classList.remove('hidden');
+      root.classList.add('flex');
+      root.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const close = () => {
+      root.classList.add('hidden');
+      root.classList.remove('flex');
+      root.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (image) image.removeAttribute('src');
+      if (lastFocusedTrigger instanceof HTMLElement) lastFocusedTrigger.focus();
+    };
+
+    const showPrev = () => {
+      const currentItems = getCurrentItems();
+      activeIndex = (activeIndex - 1 + currentItems.length) % currentItems.length;
+      render();
+    };
+
+    const showNext = () => {
+      const currentItems = getCurrentItems();
+      activeIndex = (activeIndex + 1) % currentItems.length;
+      render();
+    };
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => open(trigger));
+      trigger.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          open(trigger);
+        }
+      });
+    });
+
+    closeButtons.forEach((button) => button.addEventListener('click', close));
+    prevButtons.forEach((button) => button.addEventListener('click', showPrev));
+    nextButtons.forEach((button) => button.addEventListener('click', showNext));
+
+    root.addEventListener('touchstart', (event) => {
+      const touch = event.changedTouches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    }, { passive: true });
+
+    root.addEventListener('touchend', (event) => {
+      const touch = event.changedTouches[0];
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+
+      if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+      if (deltaX > 0) {
+        showPrev();
+      } else {
+        showNext();
+      }
+    }, { passive: true });
+
+    document.addEventListener('keydown', (event) => {
+      if (root.getAttribute('aria-hidden') === 'true') return;
+
+      if (event.key === 'Escape') close();
+      if (event.key === 'ArrowLeft') showPrev();
+      if (event.key === 'ArrowRight') showNext();
+    });
+  }
+</script>

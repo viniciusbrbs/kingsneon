@@ -1,0 +1,171 @@
+/* ==========================================================
+   KINGS NEON — Animation System
+   Keyframes, motion utilities, scroll-reveal
+   ========================================================== */
+
+/* ── Fade Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Slide Animations ── */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Scale Animations ── */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── Neon Glow Pulse ── */
+@keyframes glowPulse {
+  0%, 100% {
+    filter: brightness(1);
+    opacity: 0.7;
+  }
+  50% {
+    filter: brightness(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes neonFlicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 1;
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.4;
+  }
+}
+
+/* ── Counter Animation ── */
+@keyframes countUp {
+  from { --count: 0; }
+  to   { --count: var(--target); }
+}
+
+/* ── Line Draw ── */
+@keyframes drawLine {
+  from { stroke-dashoffset: var(--line-length, 1000); }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ── Scroll Reveal Classes ── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--duration-reveal) var(--ease-out-expo),
+    transform var(--duration-reveal) var(--ease-out-expo);
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-reveal="left"] {
+  transform: translateX(-32px);
+}
+
+[data-reveal="left"].revealed {
+  transform: translateX(0);
+}
+
+[data-reveal="right"] {
+  transform: translateX(32px);
+}
+
+[data-reveal="right"].revealed {
+  transform: translateX(0);
+}
+
+[data-reveal="scale"] {
+  transform: scale(0.92);
+}
+
+[data-reveal="scale"].revealed {
+  transform: scale(1);
+}
+
+/* ── Stagger Children ── */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-slow) var(--ease-out-expo);
+}
+
+[data-stagger].revealed > *:nth-child(1)  { transition-delay: 0ms; }
+[data-stagger].revealed > *:nth-child(2)  { transition-delay: 80ms; }
+[data-stagger].revealed > *:nth-child(3)  { transition-delay: 160ms; }
+[data-stagger].revealed > *:nth-child(4)  { transition-delay: 240ms; }
+[data-stagger].revealed > *:nth-child(5)  { transition-delay: 320ms; }
+[data-stagger].revealed > *:nth-child(6)  { transition-delay: 400ms; }
+[data-stagger].revealed > *:nth-child(7)  { transition-delay: 480ms; }
+[data-stagger].revealed > *:nth-child(8)  { transition-delay: 560ms; }
+
+[data-stagger].revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Reduced Motion Override ── */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-stagger] > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

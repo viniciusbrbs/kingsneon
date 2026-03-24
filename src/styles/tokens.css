@@ -1,0 +1,88 @@
+/* ==========================================================
+   KINGS NEON — Design Token System
+   V2 premium local-first aesthetic for neon LED signage
+   ========================================================== */
+
+:root {
+  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+  --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+  --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
+  --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
+  --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
+  --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
+  --text-3xl:  clamp(2.5rem,   1rem    + 4vw,    5rem);
+  --text-hero: clamp(3.2rem,   0.9rem  + 7vw,    7.2rem);
+
+  --font-display: 'Sora', 'Inter', Arial, sans-serif;
+  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --radius-sm:   0.375rem;
+  --radius-md:   0.625rem;
+  --radius-lg:   1rem;
+  --radius-xl:   1.5rem;
+  --radius-2xl:  2rem;
+  --radius-full: 9999px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 600ms;
+  --duration-reveal: 800ms;
+  --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  --content-narrow: 640px;
+  --content-default: 960px;
+  --content-wide: 1200px;
+  --content-ultrawide: 1440px;
+
+  --glow-blue: rgba(1, 81, 194, 0.50);
+  --glow-blue-soft: rgba(1, 81, 194, 0.18);
+  --glow-lime: rgba(192, 225, 0, 0.45);
+  --glow-lime-soft: rgba(192, 225, 0, 0.16);
+}
+
+:root {
+  --color-bg:            #010200;
+  --color-surface:       #07111f;
+  --color-surface-2:     #0b1728;
+  --color-surface-3:     #10203a;
+  --color-border:        rgba(249, 254, 255, 0.12);
+  --color-border-subtle: rgba(249, 254, 255, 0.08);
+
+  --color-text:          #f9feff;
+  --color-text-muted:    rgba(249, 254, 255, 0.82);
+  --color-text-faint:    rgba(249, 254, 255, 0.58);
+
+  --color-accent:        #c0e100;
+  --color-accent-hover:  #d7f63b;
+  --color-accent-muted:  rgba(192, 225, 0, 0.14);
+  --color-accent-subtle: rgba(192, 225, 0, 0.08);
+
+  --color-primary:       #0151c2;
+  --color-primary-hover: #2d71cf;
+  --color-primary-muted: rgba(1, 81, 194, 0.14);
+  --color-primary-subtle: rgba(1, 81, 194, 0.08);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.30);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.38);
+  --shadow-neon-sm: 0 0 10px var(--glow-lime-soft), 0 0 4px var(--glow-blue-soft);
+  --shadow-neon-md: 0 0 24px var(--glow-lime-soft), 0 0 12px var(--glow-blue-soft);
+  --shadow-neon-lg: 0 0 50px var(--glow-blue-soft), 0 0 24px var(--glow-lime-soft);
+}

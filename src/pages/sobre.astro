@@ -1,0 +1,145 @@
+---
+/**
+ * KINGS NEON — About Page
+ * Full narrative, milestones timeline, and brand values.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import Icon from '../components/ui/Icon.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+import aboutData from '../data/about.json';
+import type { AboutData, Milestone, BrandValue } from '../types';
+
+const about = aboutData as AboutData;
+
+const breadcrumbs = [
+  { name: 'Início', url: '/' },
+  { name: 'Sobre', url: '/sobre' },
+];
+
+const paragraphs = about.narrative.split('\n\n');
+---
+
+<PageLayout
+  page="sobre"
+  title={about.sectionTitle}
+  subtitle={about.shortNarrative}
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Narrative -->
+  <section class="section-padding" aria-label="Nossa história">
+    <div class="container-default">
+      <div class="max-w-prose mx-auto space-y-space-6" data-reveal>
+        {paragraphs.map((paragraph: string) => (
+          <p class="text-fluid-base text-[var(--color-text-muted)] leading-relaxed">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Milestones Timeline -->
+  <section class="section-padding bg-[var(--color-surface)]" aria-label="Nossa trajetória">
+    <div class="container-default">
+      <h2 class="font-display text-fluid-2xl font-bold text-[var(--color-text)] text-center mb-space-12" data-reveal>
+        Nossa Trajetória
+      </h2>
+
+      <div class="relative max-w-3xl mx-auto">
+        <!-- Vertical line -->
+        <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-[var(--color-border)] -translate-x-1/2 hidden md:block" aria-hidden="true"></div>
+
+        <div class="space-y-space-10">
+          {about.milestones.map((milestone: Milestone, i: number) => (
+            <div
+              class:list={[
+                'relative flex flex-col md:flex-row items-start gap-6',
+                i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse',
+              ]}
+              data-reveal
+            >
+              <!-- Year circle -->
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--color-accent)] flex items-center justify-center text-fluid-xs font-bold text-[var(--color-bg)] md:absolute md:left-1/2 md:-translate-x-1/2 z-10">
+                {milestone.year}
+              </div>
+
+              <!-- Content -->
+              <div class:list={[
+                'flex-1 md:w-[calc(50%-3rem)]',
+                i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12',
+              ]}>
+                <h3 class="font-display text-fluid-lg font-semibold text-[var(--color-text)] mb-space-2">
+                  {milestone.title}
+                </h3>
+                <p class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed">
+                  {milestone.description}
+                </p>
+              </div>
+
+              <!-- Spacer for alternating layout -->
+              <div class="hidden md:block flex-1 md:w-[calc(50%-3rem)]" aria-hidden="true"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Values -->
+  <section class="section-padding" aria-label="Nossos valores">
+    <div class="container-default">
+      <h2 class="font-display text-fluid-2xl font-bold text-[var(--color-text)] text-center mb-space-12" data-reveal>
+        Nossos Valores
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto" data-stagger>
+        {about.values.map((value: BrandValue) => (
+          <Card variant="default" padding="lg">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-[var(--color-accent-muted)] flex items-center justify-center">
+                <Icon name={value.icon} size={24} className="text-[var(--color-accent)]" />
+              </div>
+              <div>
+                <h3 class="font-display text-fluid-base font-semibold text-[var(--color-text)] mb-space-2">
+                  {value.title}
+                </h3>
+                <p class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed">
+                  {value.description}
+                </p>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-padding bg-[var(--color-surface)]" aria-label="Solicitar orçamento">
+    <div class="container-narrow text-center" data-reveal>
+      <h2 class="font-display text-fluid-xl font-bold text-[var(--color-text)] mb-space-4">
+        Quer conhecer nosso trabalho de perto?
+      </h2>
+      <p class="text-fluid-base text-[var(--color-text-muted)] mb-space-8">
+        Entre em contato e agende uma visita ou solicite um orçamento personalizado.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button
+          label="Solicitar Orçamento"
+          href="https://wa.me/5547992158989"
+          variant="primary"
+          size="lg"
+          icon="whatsapp"
+        />
+        <Button
+          label="Ver Portfólio"
+          href="/portfolio"
+          variant="outline"
+          size="lg"
+          icon="arrow-right"
+        />
+      </div>
+    </div>
+  </section>
+</PageLayout>

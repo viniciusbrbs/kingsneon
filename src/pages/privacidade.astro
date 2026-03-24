@@ -1,0 +1,154 @@
+---
+/**
+ * KINGS NEON — Privacy Policy Page
+ * LGPD-compliant privacy policy in Portuguese.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Início', url: '/' },
+  { name: 'Política de Privacidade', url: '/privacidade' },
+];
+
+const lastUpdated = '12 de março de 2026';
+---
+
+<PageLayout
+  page="privacidade"
+  title="Política de Privacidade"
+  subtitle="Saiba como coletamos, utilizamos e protegemos seus dados pessoais."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="section-padding" aria-label="Política de privacidade">
+    <div class="container-default">
+      <div class="max-w-prose mx-auto prose-container" data-reveal>
+        <p class="text-fluid-xs text-[var(--color-text-faint)] mb-space-8">
+          Última atualização: {lastUpdated}
+        </p>
+
+        <p class="text-fluid-base text-[var(--color-text-muted)] leading-relaxed mb-space-8">
+          A Kings Neon, empresa de comunicação visual especializada em letreiros e peças de neon LED, com sede em Itapema, Santa Catarina, está comprometida com a proteção dos seus dados pessoais. Esta Política de Privacidade descreve como coletamos, utilizamos, armazenamos e protegemos as informações que você nos fornece, em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD — Lei nº 13.709/2018).
+        </p>
+
+        <h2 class="font-display text-fluid-lg font-semibold text-[var(--color-text)] mt-space-10 mb-space-4">
+          1. Dados Coletados
+        </h2>
+        <p class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed mb-space-4">
+          Coletamos os seguintes dados pessoais quando você utiliza nosso site ou entra em contato conosco:
+        </p>
+        <h3 class="text-fluid-sm font-semibold text-[var(--color-text)] mt-space-6 mb-space-2">
+          1.1 Dados fornecidos por você
+        </h3>
+        <ul class="list-disc list-inside text-fluid-sm text-[var(--color-text-muted)] leading-relaxed space-y-2 mb-space-4">
+          <li>Nome completo</li>
+          <li>Número de WhatsApp / telefone</li>
+          <li>Endereço de e-mail (quando fornecido)</li>
+          <li>Tipo de projeto de interesse</li>
+          <li>Mensagens e descrições de projetos enviadas via formulário</li>
+        </ul>
+
+        <h3 class="text-fluid-sm font-semibold text-[var(--color-text)] mt-space-6 mb-space-2">
+          1.2 Dados coletados automaticamente
+        </h3>
+        <ul class="list-disc list-inside text-fluid-sm text-[var(--color-text-muted)] leading-relaxed space-y-2 mb-space-4">
+          <li>Endereço IP</li>
+          <li>Tipo de navegador e dispositivo</li>
+          <li>Páginas visitadas e tempo de permanência</li>
+          <li>Origem do tráfego (parâmetros UTM)</li>
+          <li>Dados de cookies e tecnologias similares</li>
+        </ul>
+
+        <h2 class="font-display text-fluid-lg font-semibold text-[var(--color-text)] mt-space-10 mb-space-4">
+          2. Finalidade do Tratamento
+        </h2>
+        <p class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed mb-space-4">
+          Utilizamos seus dados pessoais para as seguintes finalidades:
+        </p>
+        <ul class="list-disc list-inside text-fluid-sm text-[var(--color-text-muted)] leading-relaxed space-y-2 mb-space-4">
+          <li>Responder a solicitações de orçamento e consultas</li>
+          <li>Elaborar propostas comerciais personalizadas</li>
+          <li>Entrar em contato para acompanhamento de projetos</li>
+          <li>Enviar comunicações sobre nossos serviços (com seu consentimento)</li>
+          <li>Melhorar a experiência de navegação em nosso site</li>
+          <li>Analisar o desempenho do site e otimizar nossos serviços</li>
+          <li>Cumprir obrigações legais e regulatórias</li>
+        </ul>
+
+        <h2 class="font-display text-fluid-lg font-semibold text-[var(--color-text)] mt-space-10 mb-space-4">
+          3. Armazenamento e Segurança
+        </h2>
+        <p class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed mb-space-4">
+          Seus dados são armazenados em servidores seguros com medidas técnicas e administrativas adequadas para proteção contra acessos não autorizados, perda, alteração ou destruição. Os dados de formulário são transmitidos diretamente via WhatsApp e não são armazenados em nossos servidores.
+        </p>
+        <p class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed mb-space-4">
+          Os dados de analytics são processados pelo Google Analytics 4 e Meta Pixel, conforme as políticas de privacidade dessas plataformas. Mantemos seus dados pessoais apenas pelo período necessário para cumprir as finalidades descritas nesta política ou conforme exigido por lei.
+        </p>
+
+        <h2 class="font-display text-fluid-lg font-semibold text-[var(--color-text)] mt-space-10 mb-space-4">
+          4. Compartilhamento de Dados
+        </h2>
+        <p class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed mb-space-4">
+          Não vendemos, alugamos ou comercializamos seus dados pessoais. Podemos compartilhar informações com:
+        </p>
+        <ul class="list-disc list-inside text-fluid-sm text-[var(--color-text-muted)] leading-relaxed space-y-2 mb-space-4">
+          <li><strong class="text-[var(--color-text)]">Plataformas de analytics:</strong> Google Analytics 4, Google Tag Manager e Meta Pixel para análise de desempenho do site</li>
+          <li><strong class="text-[var(--color-text)]">WhatsApp (Meta):</strong> quando você opta por nos contatar via formulário do site</li>
+          <li><strong class="text-[var(--color-text)]">Autoridades competentes:</strong> quando exigido por lei ou determinação judicial</li>
+        </ul>
+
+        <h2 class="font-display text-fluid-lg font-semibold text-[var(--color-text)] mt-space-10 mb-space-4">
+          5. Seus Direitos (LGPD)
+        </h2>
+        <p class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed mb-space-4">
+          Em conformidade com a LGPD, você tem os seguintes direitos sobre seus dados pessoais:
+        </p>
+        <ul class="list-disc list-inside text-fluid-sm text-[var(--color-text-muted)] leading-relaxed space-y-2 mb-space-4">
+          <li><strong class="text-[var(--color-text)]">Confirmação e acesso:</strong> saber se tratamos seus dados e obter cópia deles</li>
+          <li><strong class="text-[var(--color-text)]">Correção:</strong> solicitar a correção de dados incompletos, inexatos ou desatualizados</li>
+          <li><strong class="text-[var(--color-text)]">Anonimização, bloqueio ou eliminação:</strong> solicitar o tratamento adequado de dados desnecessários ou excessivos</li>
+          <li><strong class="text-[var(--color-text)]">Portabilidade:</strong> solicitar a transferência de seus dados a outro fornecedor de serviço</li>
+          <li><strong class="text-[var(--color-text)]">Eliminação:</strong> solicitar a exclusão de dados tratados com base no seu consentimento</li>
+          <li><strong class="text-[var(--color-text)]">Informação:</strong> saber com quais entidades seus dados foram compartilhados</li>
+          <li><strong class="text-[var(--color-text)]">Revogação do consentimento:</strong> retirar seu consentimento a qualquer momento</li>
+        </ul>
+
+        <h2 class="font-display text-fluid-lg font-semibold text-[var(--color-text)] mt-space-10 mb-space-4">
+          6. Cookies e Tecnologias de Rastreamento
+        </h2>
+        <p class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed mb-space-4">
+          Nosso site utiliza cookies e tecnologias similares para:
+        </p>
+        <ul class="list-disc list-inside text-fluid-sm text-[var(--color-text-muted)] leading-relaxed space-y-2 mb-space-4">
+          <li><strong class="text-[var(--color-text)]">Cookies essenciais:</strong> necessários para o funcionamento básico do site</li>
+          <li><strong class="text-[var(--color-text)]">Cookies de analytics:</strong> Google Analytics 4 para compreender como os visitantes utilizam o site</li>
+          <li><strong class="text-[var(--color-text)]">Cookies de marketing:</strong> Meta Pixel para mensuração de campanhas publicitárias</li>
+        </ul>
+        <p class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed mb-space-4">
+          Você pode gerenciar suas preferências de cookies através das configurações do seu navegador. A desativação de cookies pode afetar a funcionalidade de algumas partes do site.
+        </p>
+
+        <h2 class="font-display text-fluid-lg font-semibold text-[var(--color-text)] mt-space-10 mb-space-4">
+          7. Contato para Solicitações de Dados
+        </h2>
+        <p class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed mb-space-4">
+          Para exercer qualquer um dos direitos descritos acima ou para esclarecer dúvidas sobre o tratamento de seus dados pessoais, entre em contato conosco:
+        </p>
+        <ul class="list-none text-fluid-sm text-[var(--color-text-muted)] leading-relaxed space-y-2 mb-space-4">
+          <li><strong class="text-[var(--color-text)]">E-mail:</strong> contato@kingsneon.com.br</li>
+          <li><strong class="text-[var(--color-text)]">WhatsApp:</strong> (47) 99215-8989</li>
+          <li><strong class="text-[var(--color-text)]">Endereço:</strong> Itapema, Santa Catarina — CEP 88220-000</li>
+        </ul>
+        <p class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed mb-space-4">
+          Responderemos às suas solicitações no prazo de até 15 (quinze) dias, conforme previsto na LGPD.
+        </p>
+
+        <h2 class="font-display text-fluid-lg font-semibold text-[var(--color-text)] mt-space-10 mb-space-4">
+          8. Alterações nesta Política
+        </h2>
+        <p class="text-fluid-sm text-[var(--color-text-muted)] leading-relaxed">
+          Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças em nossas práticas ou em exigências legais. A data de última atualização será sempre indicada no topo desta página. Recomendamos que você revise esta política regularmente.
+        </p>
+      </div>
+    </div>
+  </section>
+</PageLayout>

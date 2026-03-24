@@ -1,0 +1,17 @@
+{
+  "phone": "+554799215-8989",
+  "whatsapp": "5547992158989",
+  "whatsappFormatted": "(47) 99215-8989",
+  "email": "contato@kingsneon.com.br",
+  "address": "Itapema",
+  "city": "Itapema",
+  "region": "Santa Catarina",
+  "postalCode": "88220-000",
+  "country": "BR",
+  "businessHours": {
+    "weekdays": "Seg–Sex: 9h às 18h",
+    "saturday": "Sáb: 9h às 12h",
+    "sunday": "Dom: Fechado"
+  },
+  "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28423.8!2d-48.6158!3d-27.0922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94d8b2e8c1e1e1e1%3A0x1!2sItapema%2C+SC!5e0!3m2!1spt-BR!2sbr!4v1"
+}

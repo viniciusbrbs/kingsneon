@@ -1,0 +1,59 @@
+---
+type CardVariant = 'default' | 'interactive' | 'featured';
+type CardPadding = 'sm' | 'md' | 'lg';
+
+interface Props {
+  variant?: CardVariant;
+  padding?: CardPadding;
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  padding = 'md',
+  class: extraClass = '',
+} = Astro.props;
+
+const baseClasses = 'rounded-lg bg-[var(--color-surface)] border border-[var(--color-border-subtle)]';
+
+const paddingClasses: Record<CardPadding, string> = {
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8',
+};
+
+const variantClasses: Record<CardVariant, string> = {
+  default: 'card-default',
+  interactive: 'card-interactive cursor-pointer',
+  featured: 'card-featured',
+};
+
+const classes = [baseClasses, paddingClasses[padding], variantClasses[variant], extraClass].filter(Boolean).join(' ');
+---
+
+<div class={classes}>
+  <slot />
+</div>
+
+<style>
+  .card-default {
+    transition: var(--transition-interactive);
+  }
+
+  .card-interactive {
+    transition: transform var(--duration-base) var(--ease-out-expo),
+                box-shadow var(--duration-base) var(--ease-out-expo),
+                border-color var(--duration-base) var(--ease-out-expo);
+  }
+
+  .card-interactive:hover {
+    transform: scale(1.02);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-neon-md);
+  }
+
+  .card-featured {
+    border-top: 2px solid var(--color-accent);
+    transition: var(--transition-interactive);
+  }
+</style>

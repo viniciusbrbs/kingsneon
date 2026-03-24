@@ -1,0 +1,96 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import Button from '../ui/Button.astro';
+import PortfolioLightbox from '../ui/PortfolioLightbox.astro';
+import portfolioData from '../../data/portfolio.json';
+import type { PortfolioData, PortfolioItem } from '../../types';
+
+const portfolio = portfolioData as PortfolioData;
+const featured = portfolio.items.filter((item: PortfolioItem) => item.featured).slice(0, 6);
+---
+
+<section id="portfolio" class="section-padding" aria-label="Portfólio em destaque">
+  <div class="container-wide">
+    <div data-reveal>
+      <SectionHeader
+        title={portfolio.sectionTitle}
+        subtitle={portfolio.sectionSubtitle}
+        alignment="center"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-4 md:gap-space-6" data-stagger>
+      {featured.map((item: PortfolioItem, index: number) => (
+        <article
+          class="portfolio-card group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-lg bg-[var(--color-surface-2)]"
+          data-portfolio-lightbox-trigger="portfolio-highlight"
+          data-lightbox-index={index}
+          tabindex="0"
+          role="button"
+          aria-label={`Abrir projeto ${item.title}`}
+        >
+          <img
+            src={item.image}
+            alt={item.alt}
+            width="600"
+            height="450"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
+
+          <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-space-6 transition-opacity duration-300">
+            <span class="text-fluid-xs text-[var(--color-accent)] font-medium mb-space-1">
+              {item.category}
+            </span>
+            <h3 class="font-display text-fluid-base font-semibold text-[var(--color-text)]">
+              {item.title}
+            </h3>
+            <p class="text-fluid-xs text-[var(--color-text-muted)] mt-space-1 line-clamp-2">
+              {item.description}
+            </p>
+            {item.location && (
+              <p class="text-fluid-xs text-[var(--color-text-faint)] mt-space-2">
+                {item.location}
+              </p>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <PortfolioLightbox items={featured} lightboxId="portfolio-highlight" />
+
+    <div class="mt-space-12 text-center" data-reveal>
+      <Button
+        label="Ver Portfólio Completo"
+        href="/portfolio"
+        variant="outline"
+        size="md"
+        icon="arrow-right"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .portfolio-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(5, 5, 5, 0.9) 0%,
+      rgba(5, 5, 5, 0.4) 50%,
+      transparent 100%
+    );
+    opacity: 0;
+  }
+
+  .portfolio-card:hover .portfolio-overlay,
+  .portfolio-card:focus-within .portfolio-overlay {
+    opacity: 1;
+  }
+
+  @media (hover: none) {
+    .portfolio-overlay {
+      opacity: 1;
+    }
+  }
+</style>

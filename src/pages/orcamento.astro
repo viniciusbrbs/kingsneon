@@ -1,0 +1,98 @@
+---
+/**
+ * KINGS NEON — Quote Request Page
+ * Prominent WhatsApp form with contact info sidebar.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import Icon from '../components/ui/Icon.astro';
+import WhatsAppForm from '../components/sections/WhatsAppForm.astro';
+import contactData from '../data/contact.json';
+import processData from '../data/process.json';
+import type { ContactData, ProcessData, ProcessStep } from '../types';
+
+const contact = contactData as ContactData;
+const process = processData as ProcessData;
+
+const breadcrumbs = [
+  { name: 'Início', url: '/' },
+  { name: 'Orçamento', url: '/orcamento' },
+];
+---
+
+<PageLayout
+  page="orcamento"
+  title="Solicite seu Orçamento"
+  subtitle="Preencha o formulário e receba uma proposta personalizada diretamente no seu WhatsApp."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="section-padding" aria-label="Formulário de orçamento e informações">
+    <div class="container-wide">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+        <!-- Sidebar -->
+        <aside class="lg:col-span-2 space-y-space-8" data-reveal>
+          <!-- Process Summary -->
+          <div>
+            <h2 class="font-display text-fluid-lg font-semibold text-[var(--color-text)] mb-space-6">
+              Como funciona
+            </h2>
+            <ol class="space-y-space-6">
+              {process.steps.map((step: ProcessStep) => (
+                <li class="flex items-start gap-4">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-full bg-[var(--color-accent-muted)] flex items-center justify-center">
+                    <span class="text-fluid-xs font-bold text-[var(--color-accent)]">{step.step}</span>
+                  </div>
+                  <div>
+                    <h3 class="text-fluid-sm font-semibold text-[var(--color-text)]">{step.title}</h3>
+                    <p class="text-fluid-xs text-[var(--color-text-muted)] leading-relaxed mt-1">
+                      {step.description}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="pt-space-6 border-t border-[var(--color-border)]">
+            <h2 class="text-fluid-sm font-semibold text-[var(--color-text)] mb-space-4">
+              Prefere falar diretamente?
+            </h2>
+
+            <div class="space-y-space-4">
+              <a
+                href={`https://wa.me/${contact.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+              >
+                <Icon name="whatsapp" size={20} />
+                <span class="text-fluid-sm">{contact.whatsappFormatted}</span>
+              </a>
+              <a
+                href={`mailto:${contact.email}`}
+                class="flex items-center gap-3 text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+              >
+                <Icon name="mail" size={20} />
+                <span class="text-fluid-sm">{contact.email}</span>
+              </a>
+            </div>
+
+            <div class="mt-space-4">
+              <p class="text-fluid-xs text-[var(--color-text-faint)]">
+                {contact.businessHours.weekdays}
+              </p>
+              <p class="text-fluid-xs text-[var(--color-text-faint)]">
+                {contact.businessHours.saturday}
+              </p>
+            </div>
+          </div>
+        </aside>
+
+        <!-- WhatsApp Form -->
+        <div class="lg:col-span-3">
+          <WhatsAppForm />
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

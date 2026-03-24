@@ -1,0 +1,107 @@
+---
+/**
+ * KINGS NEON — SEO Head Component
+ * Renders meta tags, OG tags, Twitter cards, and analytics scripts.
+ */
+import type { PageSeo } from '../../types';
+import seoData from '../../data/seo.json';
+import brandData from '../../data/brand.json';
+import analyticsData from '../../data/analytics.json';
+
+interface Props {
+  page: string;
+}
+
+const { page } = Astro.props;
+const pages = seoData.pages as Record<string, PageSeo>;
+const pageSeo = pages[page] as PageSeo | undefined;
+const title = pageSeo?.title ?? seoData.defaultTitle;
+const description = pageSeo?.description ?? '';
+const canonical = pageSeo?.canonical ?? Astro.url.href;
+const ogImage = pageSeo?.ogImage ?? '/images/og-home.jpg';
+const twitterCard = pageSeo?.twitterCard ?? 'summary_large_image';
+const fullOgImage = ogImage.startsWith('http') ? ogImage : `https://kingsneon.com.br${ogImage}`;
+---
+
+<!-- Primary Meta -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content="index, follow" />
+<meta name="author" content={brandData.name} />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Language -->
+<meta http-equiv="content-language" content="pt-BR" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- Font Preloads -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={fullOgImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:site_name" content={brandData.name} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content={twitterCard} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={fullOgImage} />
+
+<!-- Theme Color -->
+<meta name="theme-color" content="#010200" />
+<meta name="msapplication-TileColor" content="#010200" />
+
+{/* GA4 */}
+{analyticsData.enabled && analyticsData.ga4MeasurementId && (
+  <>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${analyticsData.ga4MeasurementId}`}></script>
+    <script define:vars={{ gaId: analyticsData.ga4MeasurementId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('consent', 'default', { 'analytics_storage': 'denied', 'ad_storage': 'denied' });
+      gtag('config', gaId);
+    </script>
+  </>
+)}
+
+{/* GTM */}
+{analyticsData.enabled && analyticsData.gtmId && (
+  <script define:vars={{ gtmId: analyticsData.gtmId }}>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer',gtmId);
+  </script>
+)}
+
+{/* Meta Pixel */}
+{analyticsData.enabled && analyticsData.metaPixelId && (
+  <script define:vars={{ pixelId: analyticsData.metaPixelId }}>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('consent', 'revoke');
+    fbq('init', pixelId);
+    fbq('track', 'PageView');
+  </script>
+)}

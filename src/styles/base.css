@@ -1,0 +1,119 @@
+/* ==========================================================
+   KINGS NEON — Base Stylesheet
+   ========================================================== */
+
+@import './tokens.css';
+@import './animations.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--space-20);
+}
+
+body {
+  min-height: 100dvh;
+  line-height: 1.6;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at 12% 10%, rgba(1, 81, 194, 0.24), transparent 26%),
+    radial-gradient(circle at 88% 18%, rgba(192, 225, 0, 0.12), transparent 20%),
+    radial-gradient(circle at 50% 100%, rgba(1, 81, 194, 0.14), transparent 24%),
+    var(--color-bg);
+  overflow-x: hidden;
+}
+
+img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+ul[role="list"], ol[role="list"] { list-style: none; }
+input, button, textarea, select { font: inherit; color: inherit; }
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+}
+
+p, li, figcaption { text-wrap: pretty; max-width: 72ch; }
+
+a { color: var(--color-accent); text-decoration: none; }
+a:hover { color: var(--color-accent-hover); }
+
+::selection { background: var(--color-primary); color: var(--color-text); }
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+button { cursor: pointer; background: none; border: none; }
+table { border-collapse: collapse; width: 100%; }
+
+a, button, [role="button"], [role="link"], input, textarea, select {
+  transition: color var(--transition-interactive), background var(--transition-interactive), border-color var(--transition-interactive), box-shadow var(--transition-interactive), opacity var(--transition-interactive), transform var(--transition-interactive);
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.container-narrow, .container-default, .container-wide, .container-ultrawide {
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+.container-narrow { max-width: var(--content-narrow); }
+.container-default { max-width: var(--content-default); }
+.container-wide { max-width: var(--content-wide); }
+.container-ultrawide { max-width: var(--content-ultrawide); }
+
+@media (min-width: 768px) {
+  .container-narrow, .container-default, .container-wide, .container-ultrawide {
+    padding-inline: var(--space-8);
+  }
+}
+
+.text-neon {
+  color: var(--color-accent);
+  text-shadow: 0 0 8px var(--glow-lime-soft), 0 0 24px var(--glow-lime-soft), 0 0 42px rgba(1, 81, 194, 0.22);
+}
+
+.section-padding { padding-block: clamp(var(--space-12), 8vw, var(--space-24)); }
+
+.glass-panel {
+  background: linear-gradient(180deg, rgba(16, 32, 58, 0.66), rgba(5, 12, 22, 0.84));
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.surface-card {
+  background: linear-gradient(180deg, rgba(13, 27, 49, 0.95), rgba(7, 17, 31, 0.98));
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-md);
+}

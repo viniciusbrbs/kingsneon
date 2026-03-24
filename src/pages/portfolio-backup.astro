@@ -1,0 +1,160 @@
+---
+/**
+ * KINGS NEON — Portfolio Page
+ * Full portfolio grid with client-side category filtering.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import Button from '../components/ui/Button.astro';
+import portfolioData from '../data/portfolio.json';
+import ctaData from '../data/cta.json';
+import type { PortfolioData, CtaData, PortfolioItem } from '../types';
+
+const portfolio = portfolioData as PortfolioData;
+const cta = ctaData as CtaData;
+const portfolioCta = cta.blocks['portfolio']!;
+
+const breadcrumbs = [
+  { name: 'Início', url: '/' },
+  { name: 'Portfólio', url: '/portfolio' },
+];
+---
+
+<PageLayout
+  page="portfolio"
+  title={portfolio.sectionTitle}
+  subtitle={portfolio.sectionSubtitle}
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Category Filter -->
+  <section class="py-8" aria-label="Filtro de categorias">
+    <div class="container-wide">
+      <div class="flex flex-wrap gap-3 justify-center" data-reveal role="tablist" aria-label="Categorias do portfólio">
+        {portfolio.categories.map((category: string, i: number) => (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={i === 0 ? 'true' : 'false'}
+            data-filter={category}
+            class:list={[
+              'filter-btn px-5 py-2.5 rounded-full text-fluid-sm font-medium transition-all',
+              i === 0
+                ? 'bg-[var(--color-accent)] text-[var(--color-bg)]'
+                : 'bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-2)]',
+            ]}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Grid -->
+  <section class="section-padding pt-0" aria-label="Projetos">
+    <div class="container-wide">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-stagger id="portfolio-grid">
+        {portfolio.items.map((item: PortfolioItem) => (
+          <article
+            class="portfolio-item group relative rounded-xl overflow-hidden aspect-[4/3]"
+            data-category={item.category}
+          >
+            <img
+              src={item.image}
+              alt={item.alt}
+              width={600}
+              height={450}
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-950/90 via-dark-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+              <span class="text-fluid-xs font-medium text-[var(--color-accent)] uppercase tracking-wider mb-1">
+                {item.category}
+              </span>
+              <h3 class="font-display text-fluid-lg font-semibold text-white mb-1">
+                {item.title}
+              </h3>
+              <p class="text-fluid-xs text-gray-300 line-clamp-2">
+                {item.description}
+              </p>
+              {item.location && (
+                <p class="text-fluid-xs text-gray-400 mt-2">{item.location}</p>
+              )}
+            </div>
+            <!-- Touch device fallback -->
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark-950/80 to-transparent p-4 md:hidden">
+              <h3 class="font-display text-fluid-sm font-semibold text-white">{item.title}</h3>
+              <span class="text-fluid-xs text-[var(--color-accent)]">{item.category}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Empty state -->
+      <div id="portfolio-empty" class="hidden text-center py-space-12">
+        <p class="text-fluid-base text-[var(--color-text-muted)]">
+          Nenhum projeto encontrado nesta categoria.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-padding bg-[var(--color-surface)]" aria-label="Solicitar orçamento">
+    <div class="container-narrow text-center" data-reveal>
+      <h2 class="font-display text-fluid-xl font-bold text-[var(--color-text)] mb-space-4">
+        {portfolioCta.headline}
+      </h2>
+      <p class="text-fluid-base text-[var(--color-text-muted)] mb-space-8 max-w-narrow mx-auto">
+        {portfolioCta.subheadline}
+      </p>
+      <Button
+        label={portfolioCta.ctaLabel}
+        href={portfolioCta.ctaHref}
+        variant="primary"
+        size="lg"
+        icon="whatsapp"
+      />
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .portfolio-item.is-hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const items = document.querySelectorAll<HTMLElement>('.portfolio-item');
+  const emptyState = document.getElementById('portfolio-empty');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const category = btn.dataset.filter;
+
+      filterBtns.forEach((b) => {
+        b.classList.remove('bg-[var(--color-accent)]', 'text-[var(--color-bg)]');
+        b.classList.add('bg-[var(--color-surface)]', 'text-[var(--color-text-muted)]');
+        b.setAttribute('aria-selected', 'false');
+      });
+
+      btn.classList.remove('bg-[var(--color-surface)]', 'text-[var(--color-text-muted)]');
+      btn.classList.add('bg-[var(--color-accent)]', 'text-[var(--color-bg)]');
+      btn.setAttribute('aria-selected', 'true');
+
+      let visibleCount = 0;
+
+      items.forEach((item) => {
+        const itemCategory = item.dataset.category;
+        const show = category === 'Todos' || itemCategory === category;
+
+        item.classList.toggle('is-hidden', !show);
+        if (show) visibleCount++;
+      });
+
+      emptyState?.classList.toggle('hidden', visibleCount > 0);
+    });
+  });
+</script>

@@ -1,0 +1,36 @@
+{
+  "sectionTitle": "O Que Nossos Clientes Dizem",
+  "sectionSubtitle": "A satisfação de quem confiou na Kings Neon para iluminar seus projetos.",
+  "items": [
+    {
+      "name": "Mariana Costa",
+      "role": "Proprietária — Café Aurora",
+      "content": "O letreiro ficou absolutamente incrível. A qualidade do acabamento e a intensidade da luz superaram todas as expectativas. A equipe da Kings Neon foi extremamente profissional desde o primeiro contato até a instalação.",
+      "rating": 5
+    },
+    {
+      "name": "Rafael Oliveira",
+      "role": "Arquiteto de Interiores",
+      "content": "Trabalho com diversos fornecedores de comunicação visual e a Kings Neon se destaca pela excelência no atendimento e qualidade do produto final. Já indiquei para vários clientes e todos ficaram satisfeitos.",
+      "rating": 5
+    },
+    {
+      "name": "Camila Santos",
+      "role": "Noiva — Casamento 2024",
+      "content": "Nosso neon de casamento ficou perfeito! Exatamente como imaginamos. O processo de aprovação do design foi muito tranquilo e o resultado na festa foi de tirar o fôlego. Todos os convidados elogiaram.",
+      "rating": 5
+    },
+    {
+      "name": "Lucas Ferreira",
+      "role": "Proprietário — Barbearia The King",
+      "content": "Instalei o letreiro na fachada e o movimento da loja aumentou visivelmente. A peça é robusta, bem-acabada e o suporte pós-venda da Kings Neon é impecável. Recomendo demais.",
+      "rating": 5
+    },
+    {
+      "name": "Ana Beatriz Lima",
+      "role": "Designer de Interiores",
+      "content": "A atenção aos detalhes é o grande diferencial da Kings Neon. As peças que encomendei para projetos residenciais sempre chegam com qualidade impecável e dentro do prazo combinado.",
+      "rating": 5
+    }
+  ]
+}

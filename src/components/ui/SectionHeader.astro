@@ -1,0 +1,45 @@
+---
+import Badge from './Badge.astro';
+
+type Alignment = 'left' | 'center';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  alignment?: Alignment;
+  tag?: string;
+  class?: string;
+}
+
+const {
+  title,
+  subtitle,
+  alignment = 'center',
+  tag,
+  class: extraClass = '',
+} = Astro.props;
+
+const alignClasses: Record<Alignment, string> = {
+  left: 'text-left',
+  center: 'text-center mx-auto',
+};
+
+const wrapperClasses = [alignClasses[alignment], 'max-w-default mb-space-12', extraClass].filter(Boolean).join(' ');
+---
+
+<div class={wrapperClasses}>
+  {tag && (
+    <div class={`mb-space-4 ${alignment === 'center' ? 'flex justify-center' : ''}`}>
+      <Badge label={tag} variant="accent" />
+    </div>
+  )}
+  <h2 class="font-display text-fluid-2xl font-bold text-[var(--color-text)] leading-tight">
+    {title}
+  </h2>
+  {subtitle && (
+    <p class="mt-space-4 text-fluid-base text-[var(--color-text-muted)] max-w-narrow leading-relaxed"
+       class:list={[{ 'mx-auto': alignment === 'center' }]}>
+      {subtitle}
+    </p>
+  )}
+</div>

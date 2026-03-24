@@ -1,0 +1,121 @@
+---
+/**
+ * KINGS NEON — Contact Page
+ * Contact information, WhatsApp form, and social links.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import Icon from '../components/ui/Icon.astro';
+import WhatsAppForm from '../components/sections/WhatsAppForm.astro';
+import contactData from '../data/contact.json';
+import socialData from '../data/social.json';
+import type { ContactData, SocialData, SocialLink } from '../types';
+
+const contact = contactData as ContactData;
+const social = socialData as SocialData;
+
+const breadcrumbs = [
+  { name: 'Início', url: '/' },
+  { name: 'Contato', url: '/contato' },
+];
+---
+
+<PageLayout
+  page="contato"
+  title="Fale Conosco"
+  subtitle="Entre em contato para solicitar um orçamento, tirar dúvidas ou conhecer nosso trabalho."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="section-padding" aria-label="Informações de contato e formulário">
+    <div class="container-wide">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+        <!-- Contact Info Sidebar -->
+        <aside class="lg:col-span-2 space-y-space-8" data-reveal>
+          <!-- Phone/WhatsApp -->
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-[var(--color-accent-muted)] flex items-center justify-center">
+              <Icon name="phone" size={22} className="text-[var(--color-accent)]" />
+            </div>
+            <div>
+              <h2 class="text-fluid-sm font-semibold text-[var(--color-text)] mb-1">Telefone / WhatsApp</h2>
+              <a
+                href={`https://wa.me/${contact.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-fluid-base text-[var(--color-accent)] hover:underline"
+              >
+                {contact.whatsappFormatted}
+              </a>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-[var(--color-accent-muted)] flex items-center justify-center">
+              <Icon name="mail" size={22} className="text-[var(--color-accent)]" />
+            </div>
+            <div>
+              <h2 class="text-fluid-sm font-semibold text-[var(--color-text)] mb-1">E-mail</h2>
+              <a
+                href={`mailto:${contact.email}`}
+                class="text-fluid-base text-[var(--color-accent)] hover:underline"
+              >
+                {contact.email}
+              </a>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-[var(--color-accent-muted)] flex items-center justify-center">
+              <Icon name="map-pin" size={22} className="text-[var(--color-accent)]" />
+            </div>
+            <div>
+              <h2 class="text-fluid-sm font-semibold text-[var(--color-text)] mb-1">Localização</h2>
+              <p class="text-fluid-base text-[var(--color-text-muted)]">
+                {contact.city}, {contact.region}
+              </p>
+            </div>
+          </div>
+
+          <!-- Business Hours -->
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-[var(--color-accent-muted)] flex items-center justify-center">
+              <Icon name="clock" size={22} className="text-[var(--color-accent)]" />
+            </div>
+            <div>
+              <h2 class="text-fluid-sm font-semibold text-[var(--color-text)] mb-1">Horário de Atendimento</h2>
+              <ul class="text-fluid-sm text-[var(--color-text-muted)] space-y-1">
+                <li>{contact.businessHours.weekdays}</li>
+                <li>{contact.businessHours.saturday}</li>
+                <li>{contact.businessHours.sunday}</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="pt-space-6 border-t border-[var(--color-border)]">
+            <h2 class="text-fluid-sm font-semibold text-[var(--color-text)] mb-space-4">Redes Sociais</h2>
+            <div class="flex gap-4">
+              {social.links.map((link: SocialLink) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${link.platform}: ${link.handle}`}
+                  class="w-10 h-10 rounded-lg bg-[var(--color-surface-2)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-accent)] hover:bg-[var(--color-accent-muted)] transition-colors"
+                >
+                  <Icon name={link.icon} size={20} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        <!-- WhatsApp Form -->
+        <div class="lg:col-span-3">
+          <WhatsAppForm />
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,27 @@
+---
+type BadgeVariant = 'accent' | 'muted' | 'outline';
+
+interface Props {
+  label: string;
+  variant?: BadgeVariant;
+  class?: string;
+}
+
+const {
+  label,
+  variant = 'accent',
+  class: extraClass = '',
+} = Astro.props;
+
+const baseClasses = 'inline-flex items-center rounded-full px-3 py-1 text-fluid-xs font-medium font-body';
+
+const variantClasses: Record<BadgeVariant, string> = {
+  accent: 'bg-[var(--color-accent-muted)] text-[var(--color-accent)]',
+  muted: 'bg-[var(--color-surface-2)] text-[var(--color-text-muted)]',
+  outline: 'bg-transparent text-[var(--color-text-muted)] border border-[var(--color-border)]',
+};
+
+const classes = [baseClasses, variantClasses[variant], extraClass].filter(Boolean).join(' ');
+---
+
+<span class={classes}>{label}</span>

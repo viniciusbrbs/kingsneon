@@ -1,0 +1,241 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import Icon from '../ui/Icon.astro';
+import servicesData from '../../data/services.json';
+import type { ServicesData, ServiceItem } from '../../types';
+
+const services = servicesData as ServicesData;
+---
+
+<section id="orcamento" class="section-padding" aria-label="Solicitar orçamento via WhatsApp">
+  <div class="container-default">
+    <div data-reveal>
+      <SectionHeader
+        title="Solicite seu Orçamento"
+        subtitle="Preencha o formulário abaixo e entraremos em contato pelo WhatsApp."
+        alignment="center"
+      />
+    </div>
+
+    <div class="max-w-narrow mx-auto" data-reveal>
+      <form id="whatsapp-form" class="space-y-space-6" novalidate>
+        <!-- Name -->
+        <div>
+          <label for="field-name" class="block text-fluid-sm font-medium text-[var(--color-text)] mb-space-2">
+            Nome <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <input
+            type="text"
+            id="field-name"
+            name="name"
+            required
+            autocomplete="name"
+            placeholder="Seu nome completo"
+            aria-describedby="error-name"
+            class="form-input w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-fluid-sm text-[var(--color-text)] placeholder:text-[var(--color-text-faint)] focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/30 transition-colors"
+          />
+          <p id="error-name" class="form-error mt-space-1 text-fluid-xs text-red-400 hidden" role="alert"></p>
+        </div>
+
+        <!-- WhatsApp -->
+        <div>
+          <label for="field-whatsapp" class="block text-fluid-sm font-medium text-[var(--color-text)] mb-space-2">
+            WhatsApp <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <input
+            type="tel"
+            id="field-whatsapp"
+            name="whatsapp"
+            required
+            autocomplete="tel"
+            placeholder="(00) 00000-0000"
+            aria-describedby="error-whatsapp"
+            class="form-input w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-fluid-sm text-[var(--color-text)] placeholder:text-[var(--color-text-faint)] focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/30 transition-colors"
+          />
+          <p id="error-whatsapp" class="form-error mt-space-1 text-fluid-xs text-red-400 hidden" role="alert"></p>
+        </div>
+
+        <!-- Email (optional) -->
+        <div>
+          <label for="field-email" class="block text-fluid-sm font-medium text-[var(--color-text)] mb-space-2">
+            E-mail <span class="text-fluid-xs text-[var(--color-text-faint)]">(opcional)</span>
+          </label>
+          <input
+            type="email"
+            id="field-email"
+            name="email"
+            autocomplete="email"
+            placeholder="seu@email.com"
+            aria-describedby="error-email"
+            class="form-input w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-fluid-sm text-[var(--color-text)] placeholder:text-[var(--color-text-faint)] focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/30 transition-colors"
+          />
+          <p id="error-email" class="form-error mt-space-1 text-fluid-xs text-red-400 hidden" role="alert"></p>
+        </div>
+
+        <!-- Project Type -->
+        <div>
+          <label for="field-projectType" class="block text-fluid-sm font-medium text-[var(--color-text)] mb-space-2">
+            Tipo de Projeto <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <select
+            id="field-projectType"
+            name="projectType"
+            required
+            aria-describedby="error-projectType"
+            class="form-input w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-fluid-sm text-[var(--color-text)] focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/30 transition-colors appearance-none"
+          >
+            <option value="" disabled selected>Selecione o tipo de projeto</option>
+            {services.items.map((service: ServiceItem) => (
+              <option value={service.title}>{service.title}</option>
+            ))}
+            <option value="Outro">Outro</option>
+          </select>
+          <p id="error-projectType" class="form-error mt-space-1 text-fluid-xs text-red-400 hidden" role="alert"></p>
+        </div>
+
+        <!-- Message -->
+        <div>
+          <label for="field-message" class="block text-fluid-sm font-medium text-[var(--color-text)] mb-space-2">
+            Mensagem <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <textarea
+            id="field-message"
+            name="message"
+            required
+            rows="4"
+            placeholder="Descreva brevemente seu projeto..."
+            aria-describedby="error-message"
+            class="form-input w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-fluid-sm text-[var(--color-text)] placeholder:text-[var(--color-text-faint)] focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/30 transition-colors resize-y min-h-[120px]"
+          ></textarea>
+          <p id="error-message" class="form-error mt-space-1 text-fluid-xs text-red-400 hidden" role="alert"></p>
+        </div>
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          class="inline-flex items-center justify-center gap-2 w-full font-body font-medium rounded-lg px-8 py-4 text-fluid-base btn-primary bg-[var(--color-accent)] text-[var(--color-bg)] hover:bg-[var(--color-accent-hover)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] disabled:opacity-50 disabled:pointer-events-none select-none transition-all"
+        >
+          <Icon name="whatsapp" size={22} />
+          <span>Enviar pelo WhatsApp</span>
+        </button>
+      </form>
+
+      <!-- Success state -->
+      <div id="form-success" class="hidden text-center py-space-12">
+        <div class="w-16 h-16 rounded-full bg-[var(--color-accent-muted)] flex items-center justify-center mx-auto mb-space-6">
+          <Icon name="check-circle" size={32} className="text-[var(--color-accent)]" />
+        </div>
+        <h3 class="font-display text-fluid-lg font-semibold text-[var(--color-text)] mb-space-2">
+          Mensagem enviada!
+        </h3>
+        <p class="text-fluid-sm text-[var(--color-text-muted)] mb-space-6">
+          Você será redirecionado para o WhatsApp. Aguarde nosso retorno em breve.
+        </p>
+        <button
+          id="form-reset-btn"
+          type="button"
+          class="inline-flex items-center justify-center gap-2 font-body font-medium rounded-lg px-6 py-3 text-fluid-sm bg-transparent text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-2)] active:scale-[0.98] transition-all"
+        >
+          Enviar nova mensagem
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .btn-primary {
+    transition: var(--transition-interactive);
+  }
+
+  .btn-primary:hover {
+    box-shadow: var(--shadow-neon-md);
+  }
+
+  .btn-primary:active {
+    box-shadow: var(--shadow-neon-sm);
+  }
+
+  .form-input.has-error {
+    border-color: #f87171;
+  }
+</style>
+
+<script>
+  import { validateWhatsAppForm, captureUTMParams, dispatchWhatsAppCTA } from '../../lib/whatsapp';
+  import type { WhatsAppPayload } from '../../types';
+
+  const form = document.getElementById('whatsapp-form') as HTMLFormElement | null;
+  const successEl = document.getElementById('form-success');
+  const resetBtn = document.getElementById('form-reset-btn');
+
+  function clearErrors(): void {
+    form?.querySelectorAll('.form-error').forEach((el) => {
+      el.textContent = '';
+      el.classList.add('hidden');
+    });
+    form?.querySelectorAll('.form-input').forEach((el) => {
+      el.classList.remove('has-error');
+    });
+  }
+
+  function showErrors(errors: Record<string, string>): void {
+    for (const [field, message] of Object.entries(errors)) {
+      const errorEl = document.getElementById(`error-${field}`);
+      const inputEl = form?.querySelector(`[name="${field}"]`);
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.classList.remove('hidden');
+      }
+      if (inputEl) {
+        inputEl.classList.add('has-error');
+      }
+    }
+
+    const firstErrorField = Object.keys(errors)[0];
+    if (firstErrorField) {
+      const firstInput = form?.querySelector(`[name="${firstErrorField}"]`) as HTMLElement | null;
+      firstInput?.focus();
+    }
+  }
+
+  function getFormPayload(): WhatsAppPayload {
+    const data = new FormData(form!);
+    const utm = captureUTMParams();
+
+    return {
+      name: (data.get('name') as string) ?? '',
+      whatsapp: (data.get('whatsapp') as string) ?? '',
+      email: (data.get('email') as string) || undefined,
+      projectType: (data.get('projectType') as string) ?? '',
+      message: (data.get('message') as string) ?? '',
+      pageSource: window.location.pathname,
+      ...utm,
+    };
+  }
+
+  form?.addEventListener('submit', (e: Event) => {
+    e.preventDefault();
+    clearErrors();
+
+    const payload = getFormPayload();
+    const errors = validateWhatsAppForm(payload);
+
+    if (Object.keys(errors).length > 0) {
+      showErrors(errors);
+      return;
+    }
+
+    dispatchWhatsAppCTA(payload);
+
+    form.classList.add('hidden');
+    successEl?.classList.remove('hidden');
+  });
+
+  resetBtn?.addEventListener('click', () => {
+    form?.reset();
+    clearErrors();
+    successEl?.classList.add('hidden');
+    form?.classList.remove('hidden');
+  });
+</script>

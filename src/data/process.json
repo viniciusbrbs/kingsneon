@@ -1,0 +1,30 @@
+{
+  "sectionTitle": "Do briefing ao brilho final",
+  "sectionSubtitle": "Um processo claro para transformar sua ideia em um letreiro impactante, bonito e funcional.",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Briefing estratégico",
+      "description": "Entendemos marca, espaço, medidas, objetivo comercial e estilo visual desejado.",
+      "icon": "message-circle"
+    },
+    {
+      "step": 2,
+      "title": "Projeto visual",
+      "description": "Desenvolvemos a composição do letreiro para validar estética, proporção e presença.",
+      "icon": "pen-tool"
+    },
+    {
+      "step": 3,
+      "title": "Produção premium",
+      "description": "Fabricamos com materiais confiáveis, atenção ao acabamento e revisão técnica.",
+      "icon": "settings"
+    },
+    {
+      "step": 4,
+      "title": "Entrega e instalação",
+      "description": "Fazemos a finalização para que o letreiro chegue pronto para destacar o ambiente.",
+      "icon": "check-circle"
+    }
+  ]
+}

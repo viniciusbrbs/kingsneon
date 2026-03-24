@@ -1,0 +1,25 @@
+{
+  "blocks": {
+    "hero": {
+      "headline": "Seu letreiro começa aqui.",
+      "subheadline": "Solicite seu orçamento gratuito via WhatsApp e receba uma proposta personalizada.",
+      "ctaLabel": "Falar no WhatsApp",
+      "ctaHref": "https://wa.me/5547992158989",
+      "variant": "accent"
+    },
+    "portfolio": {
+      "headline": "Gostou do estilo?",
+      "subheadline": "Conte sua ideia e criamos um letreiro em neon LED pensado para sua marca ou ambiente.",
+      "ctaLabel": "Solicitar orçamento",
+      "ctaHref": "https://wa.me/5547992158989",
+      "variant": "default"
+    },
+    "footer": {
+      "headline": "Vamos criar um letreiro que realmente chama atenção?",
+      "subheadline": "Fale com a Kings Neon e receba um orçamento personalizado para Santa Catarina ou envio para todo o Brasil.",
+      "ctaLabel": "Chamar no WhatsApp",
+      "ctaHref": "https://wa.me/5547992158989",
+      "variant": "accent"
+    }
+  }
+}

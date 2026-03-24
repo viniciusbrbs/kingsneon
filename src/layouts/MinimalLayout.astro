@@ -1,0 +1,37 @@
+---
+/**
+ * KINGS NEON — Minimal Layout
+ * Stripped-down layout for error pages and minimal content pages.
+ */
+import Head from '../components/seo/Head.astro';
+import '../styles/base.css';
+
+interface Props {
+  page: string;
+}
+
+const { page } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <Head page={page} />
+  </head>
+  <body class="bg-dark-950 text-[var(--color-text)] antialiased min-h-screen flex flex-col">
+    <main class="flex-1 flex items-center justify-center">
+      <slot />
+    </main>
+
+    <footer class="py-6 text-center">
+      <a
+        href="https://www.perplexity.ai/computer"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-fluid-xs text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] transition-colors"
+      >
+        Created with Perplexity Computer
+      </a>
+    </footer>
+  </body>
+</html>

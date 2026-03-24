@@ -1,0 +1,22 @@
+{
+  "links": [
+    {
+      "platform": "Instagram",
+      "url": "https://www.instagram.com/kingsneon",
+      "handle": "@kingsneon",
+      "icon": "instagram"
+    },
+    {
+      "platform": "Facebook",
+      "url": "https://www.facebook.com/kingsneonbrasil",
+      "handle": "Kings Neon",
+      "icon": "facebook"
+    },
+    {
+      "platform": "WhatsApp",
+      "url": "https://wa.me/5547992158989",
+      "handle": "(47) 99215-8989",
+      "icon": "whatsapp"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kingsneon.com.br/sitemap-index.xml
+
+# Bloquear acesso a assets internos
+Disallow: /_assets/

@@ -1,0 +1,122 @@
+---
+/**
+ * KINGS NEON — Neon Decorativo Service Page
+ * Landing page for decorative neon LED products.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import Icon from '../components/ui/Icon.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import servicesData from '../data/services.json';
+import portfolioData from '../data/portfolio.json';
+import type { ServicesData, PortfolioData, ServiceItem, PortfolioItem } from '../types';
+
+const services = servicesData as ServicesData;
+const portfolio = portfolioData as PortfolioData;
+
+const service = services.items.find((s: ServiceItem) => s.id === 'neon-decorativo') as ServiceItem;
+const relatedItems = portfolio.items.filter((item: PortfolioItem) => item.category === 'Decorativo');
+
+const breadcrumbs = [
+  { name: 'Início', url: '/' },
+  { name: 'Serviços', url: '/#servicos' },
+  { name: service.title, url: '/neon-decorativo' },
+];
+---
+
+<PageLayout
+  page="neon-decorativo"
+  title={service.title}
+  subtitle={service.description}
+  schemaType="service"
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Features -->
+  <section class="section-padding" aria-label="Características do serviço">
+    <div class="container-default">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto" data-stagger>
+        {service.features?.map((feature: string) => (
+          <Card variant="default" padding="md">
+            <div class="flex items-center gap-3">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-accent-muted)] flex items-center justify-center">
+                <Icon name="check-circle" size={18} className="text-[var(--color-accent)]" />
+              </div>
+              <span class="text-fluid-sm font-medium text-[var(--color-text)]">{feature}</span>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-padding bg-[var(--color-surface)]" aria-label="Solicitar orçamento">
+    <div class="container-narrow text-center" data-reveal>
+      <h2 class="font-display text-fluid-xl font-bold text-[var(--color-text)] mb-space-4">
+        Transforme seu ambiente com neon
+      </h2>
+      <p class="text-fluid-base text-[var(--color-text-muted)] mb-space-8 max-w-narrow mx-auto">
+        Solicite um orçamento gratuito e receba uma proposta personalizada para sua peça de neon decorativo.
+      </p>
+      <Button
+        label="Solicitar Orçamento"
+        href="https://wa.me/5547992158989"
+        variant="primary"
+        size="lg"
+        icon="whatsapp"
+      />
+    </div>
+  </section>
+
+  <!-- Related Portfolio -->
+  {relatedItems.length > 0 && (
+    <section class="section-padding" aria-label="Projetos relacionados">
+      <div class="container-wide">
+        <SectionHeader
+          title="Projetos Decorativos"
+          subtitle="Confira alguns dos nossos projetos de neon decorativo."
+          alignment="center"
+        />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-stagger>
+          {relatedItems.map((item: PortfolioItem) => (
+            <article class="group relative rounded-xl overflow-hidden aspect-[4/3]">
+              <img
+                src={item.image}
+                alt={item.alt}
+                width={600}
+                height={450}
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-dark-950/90 via-dark-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <h3 class="font-display text-fluid-lg font-semibold text-white mb-1">
+                  {item.title}
+                </h3>
+                <p class="text-fluid-xs text-gray-300 line-clamp-2">{item.description}</p>
+                {item.location && (
+                  <p class="text-fluid-xs text-gray-400 mt-2">{item.location}</p>
+                )}
+              </div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark-950/80 to-transparent p-4 md:hidden">
+                <h3 class="font-display text-fluid-sm font-semibold text-white">{item.title}</h3>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="text-center mt-space-10" data-reveal>
+          <Button
+            label="Ver Portfólio Completo"
+            href="/portfolio"
+            variant="outline"
+            size="lg"
+            icon="arrow-right"
+          />
+        </div>
+      </div>
+    </section>
+  )}
+</PageLayout>
